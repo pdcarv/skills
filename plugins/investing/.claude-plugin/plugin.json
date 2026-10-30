@@ -1,0 +1,9 @@
+{
+  "name": "investing",
+  "version": "1.0.0",
+  "description": "Investing analysis skills: value investing built on six published frameworks applied as checks, with filing-verified inputs, deterministic screens, scenario and reverse DCF, Kelly sizing, and a private thesis journal reviewed against its checkpoints. Analysis, not financial advice.",
+  "author": {
+    "name": "hyperscaler-skills contributors"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,32 @@
+- id: L-0001
+  claim: "Heavy strength training improves cycling efficiency in trained cyclists."
+  provenance: RETRIEVED
+  source:
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12881108/
+    retrieved: 2026-08-28
+    authors: "Llanos-Lagos et al."
+    year: 2025
+  anchor: "significant effect on cycling efficiency"
+  design: {type: meta-analysis, n: 262}
+  effect: {metric: cycling_efficiency, es: 0.353, p: 0.012}
+  domain: strength_for_cycling
+  published: 2025-07-09
+  transfer: {verdict: partial, reason: "lighter cohort"}
+- id: L-0009
+  claim: "Short intervals are superior to effort-matched long intervals."
+  provenance: RECALLED
+  source: {url: https://example.org/made-up, authors: "Ronnestad et al.", year: 2015}
+  effect: {es: 0.9}
+  design: {type: RCT, n: 18}
+  domain: interval_format
+  published: 2015-02-01
+  transfer: {verdict: "yes", reason: "elite cyclists"}
+- id: L-0010
+  claim: "Duplicate anchor from the same source."
+  provenance: RETRIEVED
+  source: {url: https://pmc.ncbi.nlm.nih.gov/articles/PMC12881108/, retrieved: 2026-08-28, authors: "Llanos-Lagos et al.", year: 2025}
+  anchor: "improvement may be mainly due to an improvement in cycling efficiency and anaerobic power indeed"
+  design: {type: meta-analysis, n: 262}
+  domain: strength_for_cycling
+  published: 2025-07-09
+  transfer: {verdict: partial, reason: "lighter cohort"}

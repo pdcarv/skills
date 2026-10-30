@@ -1,0 +1,9 @@
+{
+  "name": "debugging-performance",
+  "version": "1.0.0",
+  "description": "Root-cause debugging with a hypothesis-and-evidence loop, a failing reproduction test, temporary runtime instrumentation and git bisect for regressions.",
+  "author": {
+    "name": "hyperscaler-skills contributors"
+  },
+  "license": "MIT"
+}

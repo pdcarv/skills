@@ -1,0 +1,9 @@
+{
+  "name": "software-architecture",
+  "version": "1.0.0",
+  "description": "Design and architecture practice from Google, Amazon, AWS, Google Cloud and Azure: design docs, PR/FAQs, ADRs sized by one-way vs two-way doors, timeout/retry/overload reviews, blast-radius and cell reviews, Well-Architected reviews and production readiness reviews.",
+  "author": {
+    "name": "hyperscaler-skills contributors"
+  },
+  "license": "MIT"
+}

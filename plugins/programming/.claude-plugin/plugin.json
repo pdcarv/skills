@@ -1,0 +1,9 @@
+{
+  "name": "programming",
+  "version": "1.0.0",
+  "description": "Engineering process skills for agents: spec interviews that end in SPEC.md with executable acceptance checks, red/green TDD with confirmed failing tests, code review to Google's code-health standard with verified findings, safe production rollouts (canaries, waves, bake times, flags, expand/contract schema changes), and judge-first large-scale migrations.",
+  "author": {
+    "name": "hyperscaler-skills contributors"
+  },
+  "license": "MIT"
+}

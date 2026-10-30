@@ -1,0 +1,5 @@
+verify_keys:
+  thresholds.lt2_indoor:
+    aliases: ["LT2 indoor", "indoor LT2"]
+    value: 260
+    unit: " W"

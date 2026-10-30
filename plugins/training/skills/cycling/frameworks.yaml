@@ -1,0 +1,215 @@
+# P4 — volatility tagging.
+# Every ledger row declares a `domain`. This table sets how long a retrieved
+# claim in that domain may be used before it must be re-searched.
+#
+# `stale_after_months` is measured from the source's PUBLICATION date, not its
+# retrieval date. A row past its limit must carry `recency_checked: <today>`,
+# meaning a search was run this session confirming nothing newer contradicts it.
+#
+# Rationale field is mandatory: if we cannot say why a domain moves fast, we do
+# not know enough to set a threshold.
+
+domains:
+
+  durability:
+    volatility: high
+    stale_after_months: 12
+    rationale: >
+      Field-defining papers are appearing yearly; amateur-applicable protocols
+      only emerged in 2025 and normative decay percentiles are still forming.
+
+  cho_dosing:
+    volatility: high
+    stale_after_months: 12
+    rationale: >
+      Practice (peloton) is running well ahead of evidence and the evidence is
+      actively correcting it. Guideline ceilings have moved twice since 2022.
+
+  interval_format:
+    volatility: high
+    stale_after_months: 18
+    rationale: >
+      Short-vs-long interval superiority has reversed across replications by the
+      same group. Time-near-VO2max as a surrogate is itself contested.
+
+  heat_protocols:
+    volatility: high
+    stale_after_months: 18
+    rationale: >
+      Dose-response modelling and decay kinetics are being quantified now;
+      earlier work reported binary effects without dose curves.
+
+  training_distribution:
+    volatility: medium
+    stale_after_months: 24
+    rationale: >
+      Polarized-vs-other null results keep accumulating; the mechanism debate is
+      stable but the effect-size picture is not.
+
+  concurrent_training:
+    volatility: medium
+    stale_after_months: 24
+    rationale: >
+      Umbrella-level synthesis arrived 2026 and materially narrowed where the
+      interference effect actually applies.
+
+  strength_for_cycling:
+    volatility: medium
+    stale_after_months: 24
+    rationale: >
+      Meta-analytic effect sizes and, more importantly, the identified mechanism
+      have shifted from threshold-mediated to efficiency-mediated.
+
+  threshold_determination:
+    volatility: medium
+    stale_after_months: 36
+    rationale: >
+      Anchoring method (threshold vs percentage) is under active revision;
+      the underlying lactate physiology is not.
+
+  load_monitoring:
+    volatility: medium
+    stale_after_months: 36
+    rationale: >
+      sRPE / monotony / ACWR validity is contested in the injury literature.
+
+  altitude:
+    volatility: medium
+    stale_after_months: 24
+    rationale: >
+      tHbmass response and decay kinetics under revision alongside heat.
+
+  nutrition_periodisation:
+    volatility: medium
+    stale_after_months: 24
+    rationale: >
+      Train-low application boundaries keep narrowing as trained-athlete data lands.
+
+  red_s:
+    volatility: medium
+    stale_after_months: 36
+    rationale: >
+      IOC consensus statements are periodically reissued; clinical thresholds move.
+
+
+  biomechanics_pathology:
+    volatility: low
+    stale_after_months: 60
+    rationale: >
+      Tissue loading mechanics are stable; the weak evidence base is weak in a
+      stable way.
+
+
+
+  exercise_bioenergetics:
+    volatility: low
+    stale_after_months: 120
+    rationale: >
+      Fick equation, substrate crossover, glycolytic flux. Textbook-stable.
+
+  tapering:
+    volatility: low
+    stale_after_months: 60
+    rationale: >
+      Two meta-analyses (2007, 2023) agree on duration, volume cut and kept
+      intensity; the remaining questions are moderators, not direction.
+
+  illness_return:
+    volatility: medium
+    stale_after_months: 36
+    rationale: >
+      Consensus-driven (IOC 2023) with sparse return-timing data; expect revision
+      as return-to-sport studies accumulate.
+
+  # --- declared, partly unsourced ---
+  sleep:
+    volatility: low
+    stale_after_months: 36
+    rationale: >
+      Sleep-performance findings are stable and the mechanism is not contested.
+      The moving part is the extension protocol, not the underlying effect.
+
+  recovery_modalities:
+    volatility: medium
+    stale_after_months: 24
+    rationale: >
+      The cold-immersion interference finding has replicated but its boundary
+      conditions (timing, temperature, endurance vs strength) are still being
+      drawn, and practice lags the correction badly.
+
+  psychological_skills:
+    volatility: low
+    stale_after_months: 36
+    rationale: >
+      Small, slow-moving literature with stable effect sizes. The risk here is
+      transfer from lab time-trials to road events, not staleness.
+
+  respiratory_training:
+    volatility: low
+    stale_after_months: 36
+    rationale: >
+      Mature literature. The trained-athlete attenuation has been the settled
+      picture for years; new work is mostly replication in new populations.
+
+  mobility:
+    volatility: low
+    stale_after_months: 36
+    rationale: >
+      The acute static-stretching picture has been stable for two decades.
+      Cited as a reason to exclude far more often than to include.
+
+  ergogenic_aids:
+    volatility: medium
+    stale_after_months: 24
+    rationale: >
+      Doses, timing protocols and responder-variance work are still active even
+      though the primary effects are well established.
+
+  skills_expertise:
+    volatility: low
+    stale_after_months: 60
+    rationale: >
+      Practitioner knowledge, not a research literature. It does not go stale
+      because it was never dated — which is why it caps at Level 2.
+
+# ---------------------------------------------------------------------------
+# Frames available to the three roles. These are CITABLE POSITIONS, not personas.
+# See references/method.md (persona fidelity) for what may and may not be said
+# about a named researcher.
+
+frames:
+  - {name: "six-zone metabolic model",        attributed: "San Millán",        domain: threshold_determination}
+  - {name: "polarized 80/20 hierarchy",       attributed: "Seiler",            domain: training_distribution}
+  - {name: "session-RPE / monotony / strain", attributed: "Foster",            domain: load_monitoring}
+  - {name: "lactate-controlled double threshold", attributed: "Bakken",        domain: training_distribution}
+  - {name: "continuous field individualisation",  attributed: "Bu",            domain: threshold_determination}
+  - {name: "heavy strength for endurance",    attributed: "Rønnestad & Mujika", domain: strength_for_cycling}
+  - {name: "block periodisation",             attributed: "Issurin",           domain: training_distribution}
+  - {name: "CHO periodisation / fuel for the work required", attributed: "Burke & Hawley", domain: nutrition_periodisation}
+  - {name: "multiple transportable CHO",      attributed: "Jeukendrup",        domain: cho_dosing}
+  - {name: "RED-S clinical framework",        attributed: "Mountjoy / IOC",    domain: red_s}
+  - {name: "critical power / W'-balance",     attributed: "Jones & Vanhatalo / Skiba", domain: threshold_determination}
+  - {name: "psychobiological model",          attributed: "Marcora",           domain: training_distribution}
+  - {name: "durability / fatigue resistance", attributed: "Maunder & Jones",   domain: durability}
+  - {name: "concurrent training interference", attributed: "Coffey & Hawley",  domain: concurrent_training}
+
+  - {name: "zone anchoring on measured thresholds", attributed: "Jamnick et al. 2020", domain: threshold_determination}
+  - {name: "intensity distribution network meta-analysis", attributed: "Rosenblat et al. 2025", domain: training_distribution}
+  - {name: "fitness-fatigue model limits",    attributed: "Banister (model); Marchal 2025; Ceddia 2026 (critiques)", domain: load_monitoring}
+  - {name: "HRV-guided training",            attributed: "Plews & Buchheit; Javaloyes 2019", domain: load_monitoring}
+  - {name: "taper",                          attributed: "Bosquet 2007; Mujika", domain: tapering}
+  - {name: "graded return after respiratory illness", attributed: "IOC consensus 2023", domain: illness_return}
+  - {name: "heat acclimatisation",           attributed: "Racinais et al. 2015 consensus", domain: heat_protocols}
+
+  # --- declared, UNSOURCED. A check reaching for one of these abstains at
+  # --- Level 1 until a source is retrieved in-session.
+  - {name: "sleep duration and extension",    attributed: null, domain: sleep,                sourced: false}
+  - {name: "recovery modality interference",  attributed: null, domain: recovery_modalities,  sourced: false}
+  - {name: "psychological skills training",   attributed: null, domain: psychological_skills, sourced: false}
+  - {name: "stress, coping and adversity response", attributed: null, domain: psychological_skills, sourced: false}
+  - {name: "inspiratory muscle training",     attributed: null, domain: respiratory_training, sourced: false}
+  - {name: "stretching and mobility",         attributed: null, domain: mobility,             sourced: false}
+  - {name: "legal ergogenic aids",            attributed: null, domain: ergogenic_aids,       sourced: false}
+  - {name: "skills and racecraft",            attributed: null, domain: skills_expertise,     sourced: false}
+  - {name: "altitude and heat responder variance", attributed: null, domain: altitude,        sourced: false}
+  - {name: "body composition trajectory",     attributed: null, domain: red_s,                sourced: false}

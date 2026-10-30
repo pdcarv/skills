@@ -1,0 +1,9 @@
+{
+  "name": "training",
+  "version": "1.0.0",
+  "description": "Endurance training skills with the athlete's state kept in a private folder: a cycling coach that interviews the rider to build a plan, reviews every logged session, and adapts to disruptions, backed by a deterministic compute layer and evidence-graded explanations.",
+  "author": {
+    "name": "hyperscaler-skills contributors"
+  },
+  "license": "MIT"
+}

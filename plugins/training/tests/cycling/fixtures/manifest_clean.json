@@ -1,0 +1,2 @@
+{"runs":[{"id":"R-01","script":"power_duration.py","inputs_hash":"ab12cd","timestamp":"2026-08-28T14:02:11Z",
+  "outputs":{"cp_w":250.0,"w_prime_j":36000,"subset_sd_w":8.4}}]}
