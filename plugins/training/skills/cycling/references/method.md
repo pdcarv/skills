@@ -24,7 +24,7 @@ protocols key off this field.
 
 ## Provenance types
 
-| Type | Meaning | May carry a citation? | Max confidence (P3) |
+| Type | Meaning | May carry a citation? | Max confidence |
 |---|---|---|---|
 | `RETRIEVED` | Traceable to an artifact fetched this session | Yes — URL + retrieval date required | Level 5 |
 | `COMPUTED` | Output of a deterministic script | No — carries run ID instead | Level 5 |
@@ -79,7 +79,7 @@ checks and by the verification gate. It is a working file, not athlete state
   transfer:
     verdict: partial                # yes | partial | no
     reason: "cohort mean mass 72 kg vs this athlete's; ES may not scale linearly"
-  contested_by: []                  # ids of contradicting rows -> triggers P5
+  contested_by: []                  # ids of contradicting rows -> see `replication: contested` below
 ```
 
 ### Field notes
@@ -97,7 +97,7 @@ of `frameworks.md` (contested science) or in `state/contradictions.yaml`
 (a conflict in this athlete's data), and sets `do_not_assert` behaviour.
 
 **`domain`** must be a key in `frameworks.md`; it determines the staleness
-threshold applied in the RECENCY check (P4).
+threshold applied in the RECENCY check.
 
 ## Working files (outside state)
 
@@ -139,9 +139,8 @@ that is itself the finding.
 
 ## Deterministic confidence calibration
 
-Confidence is computed from evidence properties, never asserted from fluency.
-This replaces all three prior taxonomies (High/Medium/Low, Level 1–5 as a free
-choice, and ± bands) with one rubric evaluated by the verifier.
+Confidence is computed from evidence properties, never asserted from fluency,
+using one rubric evaluated by the verifier.
 
 ```
 score = design_weight × population_match × replication × recency_factor
@@ -234,7 +233,7 @@ to bypass the check.
 |---|---|
 | `NUMERIC` | a number with no ledger row, manifest run, profile value, or allow-comment |
 | `CITATION` | an (Author, Year) with no RETRIEVED row + URL; a RECALLED row carrying source/effect data |
-| `CONFIDENCE` | an asserted level that differs from the P3 rubric; a bare "Confidence Level N" with no ledger anchor |
+| `CONFIDENCE` | an asserted level that differs from the confidence rubric; a bare "Confidence Level N" with no ledger anchor |
 | `RECENCY` | a high-volatility row past its staleness window without `recency_checked` |
 | `QUOTE` | any span ≥15 words; more than one anchor per source |
 | `UNITS` | a quantity outside its physiological plausibility band |
@@ -262,7 +261,7 @@ Mechanical checks catch fabrication. They do not catch being wrong. So:
 
 **Step 3's independence is the entire mechanism.** A verifier that reads the
 draft first will rationalise it rather than test it. In practice this means a
-separate subagent (ideally a different model) that receives the questions and
+separate subagent (a different model only with the rider's OK) that receives the questions and
 the ledger but not the prose. This is the one place a second agent earns its
 cost: multi-agent debate on one model often does no better than a single
 agent, while an independent check or a different model does help.
@@ -313,7 +312,7 @@ name, so the ledger shows which evidence supported which check.
 ```
 SATURATION   stop when two consecutive searches return no new ledger rows
 COVERAGE     before EMIT, every load-bearing claim must map to ≥1 ledger row
-             unmet → search again, or ABSTAIN on that sub-claim (P8)
+             unmet → search again, or ABSTAIN on that sub-claim (see Abstention)
 ESCALATION   budget exhausted with coverage unmet → emit the partial answer plus
              an explicit gap list
 
@@ -353,7 +352,7 @@ is supported and abstain narrowly.
 
 ## When abstention is mandatory
 
-- Coverage unmet after the search budget is exhausted (P7).
+- Coverage unmet after the search budget is exhausted (see Stop rules).
 - A claim is contested (`frameworks.md` register or `state/contradictions.yaml`)
   — present both positions instead.
 - A prescription would depend on a `STATED` value that has never been measured,
@@ -382,50 +381,32 @@ proceed. Ask only for fields whose absence would flip the answer.
 
 ## Persona fidelity
 
-## The problem with emulation
-
-Asking a model to speak as a named researcher raises hallucination probability.
-It licenses the generation of *X-shaped sentences*, and "shaped like X" is
-precisely the failure mode. The persona must operate as a **retrieval
-constraint**, not a generation licence.
-
-## The rule
+Asking a model to speak as a named researcher raises hallucination probability:
+it licenses sentences shaped like that person rather than claims they made. A
+named researcher may be credited only with:
 
 ```
-A named-researcher voice may assert ONLY:
   (a) positions traceable to a RETRIEVED artifact authored by that person, or
   (b) direct application of a framework listed in frameworks.yaml,
       carrying its primary citation.
 
-Everything else is emitted by the ROLE, not the person:
+Everything else is stated by the check, not the person:
 
   YES  "The Adaptation check, reasoning from the six-zone metabolic framework…"
   NO   "San Millán would say…"
 
-Speculation about what a researcher "would say" is prohibited outright.
-Where their published position is genuinely unknown on the question, the
-correct output is: "<name> has not published on this."
+Where their published position is unknown on the question, write:
+"<name> has not published on this."
 ```
 
-## What this preserves
+Real disagreement between frameworks, such as Seiler's polarized hierarchy and
+Bakken's lactate-controlled double-threshold, is informative: it sits in the
+contested register of `frameworks.md`, and the checks invoke each side by name.
 
-The value of a researcher panel was never the impersonation. It was that
-Seiler's polarized hierarchy and Bakken's lactate-controlled double-threshold
-genuinely disagree, and that the disagreement is informative. That survives
-intact: the lenses are listed in `frameworks.md`, the checks invoke them by
-name, and live disagreements sit in its contested register rather than being
-resolved by whichever voice sounded more confident.
-
-The evidence points the same way. Expert personas in prompts did not reliably
-improve factual accuracy (162 roles, 2,410 questions; Zheng et al., EMNLP
-Findings 2024) and lowered accuracy on knowledge benchmarks in later preprints,
-with longer biographical personas doing more damage.
-
-## What it removes
-
-- Invented positions attributed to real people.
-- Rhetorical authority substituting for evidence ("Bakken would tell you…").
-- The illusion of six independent experts where there is one model.
+Expert personas in prompts did not reliably improve factual accuracy (162 roles,
+2,410 questions; Zheng et al., EMNLP Findings 2024) and lowered accuracy on
+knowledge benchmarks in later preprints, with longer biographical personas doing
+more damage.
 
 ## Voice register
 

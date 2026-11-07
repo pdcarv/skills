@@ -73,7 +73,8 @@ Screening flags risk; it never diagnoses.
 - **Life stress and travel** count as load (IOC load consensus): record the
   level and source.
 
-Write `screening.yaml`.
+Play back the screening answers in a short summary and get confirmation before
+writing `screening.yaml`.
 
 ## 4. Anchors and tests
 
@@ -83,8 +84,9 @@ heavy/severe boundary. FTP and percentages of maximum are fallbacks, flagged as
 such, never the anchor.
 
 - **No measured anchors:** the plan's first block is a test block. Choose the
-  protocols from `references/protocols.md` (step test, CP efforts, durability)
-  and write them to `tests.yaml` as fixed protocols.
+  protocols from `references/protocols.md` (step test, CP efforts, durability),
+  play them back, and once the rider confirms, write them to `tests.yaml` as
+  fixed protocols.
 - **Durability:** fix the protocol now (work dose in kJ, intensity, fuelling,
   environment). Results from a different protocol are not comparable.
 - **Measured anchors exist:** compute zones with `scripts/zones.py` and keep

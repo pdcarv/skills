@@ -9,7 +9,7 @@ Checks (see protocols/verification.md):
   NUMERIC     every numeric token in the draft traces to a ledger row, a compute
               manifest run, the athlete profile, or an explicit allow-comment
   CITATION    every (Author, Year) pattern traces to a RETRIEVED ledger row with a URL
-  CONFIDENCE  every asserted confidence level equals the P3 rubric value
+  CONFIDENCE  every asserted confidence level equals the confidence rubric value
   RECENCY     no high-volatility row is used past its staleness threshold unchecked
   QUOTE       no verbatim span >=15 words; at most one quoted span per source
   UNITS       quantities fall inside physiological plausibility bands
@@ -328,7 +328,7 @@ def _as_date(v) -> date | None:
         return None
 
 
-# ---- P3 rubric ------------------------------------------------------------ #
+# ---- confidence rubric ----------------------------------------------------- #
 
 DESIGN_WEIGHT = {
     "meta-analysis": 1.0, "systematic-review": 1.0, "rct": 0.85, "crossover": 0.8,

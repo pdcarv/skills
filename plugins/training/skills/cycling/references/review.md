@@ -87,8 +87,9 @@ Tell the rider, in this order: what happened (numbers with their notes), how it
 compares with the plan, what it means (five-part explanation for any change),
 and what the next session is.
 
-Write the session file, the wellness record if given, and, if the rider
-approved a change, a new plan version plus its changelog entry. Run
+Write the session file (`sessions/<date>-<slug>.yaml`: the logged session, its
+computed metrics and their run ids), the wellness record if given, and, if the
+rider approved a change, a new plan version plus its changelog entry. Run
 `scripts/verify_output.py` on the summary. Report the files written.
 
 ## Gotchas

@@ -1,0 +1,9 @@
+{
+  "name": "documentation",
+  "version": "1.0.0",
+  "description": "Writing skills for engineers: Google-style design docs, ADRs sized by one-way vs two-way doors, service runbooks, Amazon-style narrative memos and weekly updates, brag documents built from evidence the user verifies, and lessons routed to the cheapest durable place.",
+  "author": {
+    "name": "hyperscaler-skills contributors"
+  },
+  "license": "MIT"
+}

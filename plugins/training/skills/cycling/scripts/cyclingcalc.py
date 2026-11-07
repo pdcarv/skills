@@ -344,8 +344,10 @@ def trace_gate(draft_text, allowed_values):
 
 # ------------------------------------------------------------- selftest
 def selftest():
-    f = []
+    f, checks = [], 0
     def chk(name, got, want, tol=0.05):
+        nonlocal checks
+        checks += 1
         if got is None or abs(float(got) - float(want)) > tol:
             f.append(f"{name}: got {got}, want {want}")
     r = cp_wprime([(720, 300), (1200, 280)])
@@ -366,7 +368,7 @@ def selftest():
     chk("physics roundtrip", p["total_w"], 240, 0.5)
     t = trace_gate("value is 42 and 250.5", {"a": 250.5})
     chk("gate catches 42", len(t["unsourced"]), 1)
-    print("SELFTEST " + ("PASS (12 checks)" if not f else "FAIL:\n  " + "\n  ".join(f)))
+    print(f"SELFTEST {'PASS' if not f else 'FAIL'} ({checks} checks)" + "".join(f"\n  {x}" for x in f))
     return 1 if f else 0
 
 

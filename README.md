@@ -4,13 +4,12 @@ Every skill uses only the portable Agent Skills frontmatter (`name`, `descriptio
 
 | Plugin | Skills |
 |---|---|
-| `software-architecture` | design-doc, working-backwards-prfaq, architecture-decision-record, timeout-retry-overload-review, blast-radius-review, well-architected-review, production-readiness-review |
-| `programming` | spec-interview, red-green-tdd, code-review-standard, safe-rollout, large-scale-migration |
-| `debugging-performance` | systematic-debugging |
-| `oncall-incident` | incident-command, mitigate-first, blameless-postmortem, slo-burn-rate-alerts, runbook-author, toil-audit, production-safe-agent |
-| `personal-productivity` | narrative-memo, brag-document, research, session-handoff, compound-learnings |
+| `documentation` | design-doc, adr, memo, runbook, brag, learnings |
+| `programming` | grill, tdd, review, migrate, resilience, research, handoff |
+| `debugging-performance` | diagnose |
+| `sre` | create-slo, team-toil |
 | `training` | cycling |
-| `investing` | value-investing |
+| `investing` | valuation |
 
 See `TAXONOMY.md` for subcategories and `CONTRIBUTING.md` for the authoring rules.
 
@@ -20,7 +19,7 @@ See `TAXONOMY.md` for subcategories and `CONTRIBUTING.md` for the authoring rule
 
 ```bash
 claude plugin marketplace add ./hyperscaler-skills        # or <owner>/<repo> once pushed
-claude plugin install oncall-incident@hyperscaler-skills  # repeat per plugin you want
+claude plugin install sre@hyperscaler-skills  # repeat per plugin you want
 ```
 
 Enable only the plugins you need: every enabled skill's name and description sits in context on every turn.
@@ -29,7 +28,7 @@ Enable only the plugins you need: every enabled skill's name and description sit
 
 ```bash
 mkdir -p .claude/skills
-cp -r hyperscaler-skills/plugins/oncall-incident/skills/* .claude/skills/
+cp -r hyperscaler-skills/plugins/sre/skills/* .claude/skills/
 ```
 
 ## Ground rules baked into every skill

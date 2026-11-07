@@ -1,9 +1,0 @@
-{
-  "name": "oncall-incident",
-  "version": "1.0.0",
-  "description": "On-call and incident response skills: incident command, mitigation-first triage, blameless postmortems, SLO burn-rate alerts, runbooks, toil audits and guardrails for agents that touch production.",
-  "author": {
-    "name": "hyperscaler-skills contributors"
-  },
-  "license": "MIT"
-}

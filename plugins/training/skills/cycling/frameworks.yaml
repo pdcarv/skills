@@ -1,4 +1,4 @@
-# P4 — volatility tagging.
+# Volatility tagging.
 # Every ledger row declares a `domain`. This table sets how long a retrieved
 # claim in that domain may be used before it must be re-searched.
 #

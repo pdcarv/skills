@@ -15,8 +15,8 @@ Writes `conditions.yaml`, the changelog entry and the new plan version, and
 ## 1. Record the condition
 
 Ask only what the rule needs: what happened, since when, how severe, and what
-the rider can do now. Record the episode in `conditions.yaml` in the rider's
-words.
+the rider can do now. Play the episode back in the rider's words and, once
+they confirm, record it in `conditions.yaml`.
 
 ## 2. Apply the matching rule
 

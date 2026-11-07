@@ -24,6 +24,19 @@ SECTIONS = [
 # scripts) whose structure does not fit the procedure template; they skip the
 # section check but keep every frontmatter and portability rule.
 DOMAIN_PLUGINS = {"training", "investing"}
+# Side-effect commands that must be gated (CONTRIBUTING.md, Content rules): a
+# line naming one needs a gate word on the same line, or it is reported.
+SIDE_EFFECT_RE = re.compile(
+    r"git (add|commit|push|merge|rebase|stash|reset|clean|tag)\b|git checkout -- |"
+    r"--permission-mode dontAsk|--dangerously-skip-permissions|uv run --with|pip install|"
+    r"\bfile (it|each|them|a bug|a ticket)\b|\bshare it\b|\bsend (it|the)\b|\bpost (it|the)\b",
+    re.I,
+)
+GATE_RE = re.compile(
+    r"\b(never|do not|don't|propos\w*|approv\w*|confirm\w*|ask\w*|draft\w*|"
+    r"the user (runs|applies|posts|sends|commits)|for the user|worktree)\b",
+    re.I,
+)
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 KEY_RE = re.compile(r"^([A-Za-z0-9_-]+):(.*)$")
 CHILD_RE = re.compile(r"^\s+([A-Za-z0-9_-]+):(.*)$")
@@ -160,6 +173,23 @@ def check(skill_dir):
                 warnings.append(f"references/{fn} is over 100 lines without a table of contents")
             if fn not in "\n".join(lines):
                 warnings.append(f"references/{fn} is not mentioned in SKILL.md")
+    if not any(l.startswith("**Side effects:**") for l in body):
+        errors.append("no '**Side effects:**' line (what it writes, external reads, what it never does)")
+    texts = [("SKILL.md", lines)]
+    for sub in ("references", "roles"):
+        sd = os.path.join(skill_dir, sub)
+        if os.path.isdir(sd):
+            for fn in sorted(os.listdir(sd)):
+                fp = os.path.join(sd, fn)
+                if os.path.isfile(fp) and fn.endswith(".md"):
+                    with open(fp, encoding="utf-8", errors="replace") as fh:
+                        texts.append((f"{sub}/{fn}", fh.read().splitlines()))
+    for rel, tl in texts:
+        for n, l in enumerate(tl, 1):
+            # Permission-rule patterns such as "Bash(git push *)" restrict the command, not run it.
+            if SIDE_EFFECT_RE.search(l) and not GATE_RE.search(l) and "Bash(" not in l:
+                warnings.append(f"{rel}:{n} side-effect command with no gate word: {l.strip()[:80]}")
+
     if "\\" in "\n".join(l for l in lines if "](" in l):
         warnings.append("backslash in a link; use forward-slash paths")
     return errors, warnings

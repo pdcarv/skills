@@ -16,3 +16,4 @@ rm -f "${out}"
 # zip from the parent so the archive contains <name>/SKILL.md, as claude.ai expects
 (cd "$(dirname "${skill_dir}")" && zip -qr "${out}" "${name}" -x '*/__pycache__/*' '*.pyc' '*/.DS_Store')
 echo "wrote ${out}"
+echo "warning: ${out} contains a copy of any state/ data (private); do not share or commit it" >&2

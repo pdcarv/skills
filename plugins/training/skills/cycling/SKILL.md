@@ -4,6 +4,7 @@ description: "Coaches a road cyclist through three procedures: an interview that
 license: MIT
 metadata:
   category: "training/cycling"
+  sources: "see Sources section"
   version: "2026-10-30.1"
 ---
 
@@ -13,22 +14,31 @@ A coaching skill for one road cyclist, built on three procedures that share one
 evidence base, one compute layer and one state folder. If asked which version
 you are running, state `metadata.version` from this file's frontmatter.
 
+**Side effects:** Writes the athlete's private `state/` folder only through the
+three procedures and reports every write, and keeps working files in a scratch
+folder such as `/tmp/cycling-<slug>/`. Reads the web to retrieve cited sources
+and, with the rider's OK, downloads `numpy` and `pyyaml` from PyPI through `uv`
+and sends verification questions to a different model; otherwise never posts,
+shares or uploads the rider's data.
+
 ## Start here
 
 Run every command from this skill's directory (the folder containing this
 SKILL.md); all paths below are relative to it.
 
 ```bash
-python3 scripts/cyclingcalc.py selftest     # expect SELFTEST PASS (12 checks)
-python3 scripts/search_sim.py  selftest     # expect SELFTEST PASS (24 checks)
+python3 scripts/cyclingcalc.py selftest     # expect SELFTEST PASS
+python3 scripts/search_sim.py  selftest     # expect SELFTEST PASS
 ```
 
 If that fails, say so and stop: without the compute layer every number would be
 unsourced, which is the failure this skill exists to prevent.
 
 `scripts/load.py` and `scripts/power_duration.py` need `numpy`;
-`scripts/verify_output.py` needs `pyyaml`. If either is missing, run those
-scripts as `uv run --no-project --with numpy --with pyyaml python3 scripts/<script>.py ...`
+`scripts/verify_output.py` needs `pyyaml`. If either is missing, ask the rider
+before the first run, because `uv` downloads them from PyPI (or ask them to
+install the packages themselves); once they agree, run those scripts as
+`uv run --no-project --with numpy --with pyyaml python3 scripts/<script>.py ...`
 rather than skipping them.
 
 Then list `state/`. In Claude Code and Cursor it is a link to the athlete's
@@ -136,3 +146,36 @@ before trusting its output.
 Road endurance cycling: planning, testing, session review, adaptation,
 fuelling, strength and recovery. Out of scope: bike fit and position,
 aerodynamic equipment, TT, track, MTB and triathlon. Decline those and say so.
+
+## Sources
+
+What the skill's frameworks rest on, with the status of each in
+`references/frameworks.md`. Being listed here is not retrieval: non-negotiable 2
+still applies to anything cited in output. Entries without a URL were carried
+over from `references/frameworks.md` and are `unverified` this session.
+
+- Thresholds: Jamnick, Pettitt, Granata, Pyne & Bishop, Sports Med, 2020; Wong,
+  Burnley, Mauger, Sun & Hopker, J Sports Sci, 2023.
+- Intensity distribution: Rosenblat et al., Sports Med, 2025; Stöggl & Sperlich,
+  Front Physiol, 2015; Oliveira, Boppre & Fonseca, Sports Med, 2024.
+- Load: Soligard et al., IOC consensus, BJSM, 2016; Marchal et al., Sci Rep,
+  2025; Ceddia, Bondell & Taylor, J Quant Anal Sports, 2026; Ferguson, thesis,
+  2014.
+- HRV: Javaloyes et al., IJSPP, 2019; Manresa-Rocamora et al., IJERPH, 2021;
+  Düking et al., JSAMS, 2021.
+- Durability: Maunder et al., Sports Med, 2021; Jones, J Physiol, 2024; Hunter,
+  Maunder, Jones, Gallo & Muniz-Pumares, Exp Physiol, 2025.
+- Energy availability: Mountjoy et al., IOC consensus, BJSM, 2023.
+- Tapering: Bosquet et al., MSSE, 2007; Wang et al., PLoS One, 2023.
+- Illness and heat: IOC consensus on acute respiratory illness, BJSM, 2023;
+  Racinais et al., consensus, 2015.
+- Named in `references/frameworks.md` with no dated source: San Millán, Bu,
+  Seiler, Bakken, Issurin, Rønnestad, Foster, Banister, Plews & Buchheit,
+  Vanhatalo, Skiba, Mujika, Vikmoen, Coffey, Hawley, Samozino, Burke,
+  Jeukendrup, Coyle, Périard, Levine, Stray-Gundersen, Marcora, Gollwitzer.
+- Method: Zheng et al., "Is 'A Helpful Assistant' the Best Role for Large
+  Language Models?", EMNLP Findings, 2024: https://aclanthology.org/2024.findings-emnlp.888/ ;
+  Zhang et al., multi-agent debate evaluation, arXiv 2502.08788 v3, Jun 2025:
+  https://arxiv.org/abs/2502.08788v3 ; Dhuliawala et al., "Chain-of-Verification
+  Reduces Hallucination in Large Language Models", arXiv 2309.11495, Sep 2023:
+  https://arxiv.org/abs/2309.11495

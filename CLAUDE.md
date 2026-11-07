@@ -1,6 +1,6 @@
 # skills
 
-Personal Agent Skills library, packaged as a Claude Code plugin marketplace owned by `pdcarv`: 7 plugins, 27 skills. README.md covers install, TAXONOMY.md the categories, CONTRIBUTING.md the authoring rules (read it before writing or editing a skill).
+Personal Agent Skills library, packaged as a Claude Code plugin marketplace owned by `pdcarv`: 6 plugins, 18 skills. README.md covers install, TAXONOMY.md the categories, CONTRIBUTING.md the authoring rules (read it before writing or editing a skill).
 
 ## Layout
 
@@ -21,7 +21,7 @@ python3 scripts/check_skill.py plugins/*/skills/*
 
 # use the library locally
 claude plugin marketplace add <path to your clone>
-claude plugin install oncall-incident@hyperscaler-skills
+claude plugin install sre@hyperscaler-skills
 ```
 
 ## Rules that are easy to miss

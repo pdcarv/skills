@@ -1,9 +1,0 @@
-{
-  "name": "personal-productivity",
-  "version": "1.0.0",
-  "description": "Writing and knowledge skills for engineers working with agents: Amazon-style narrative memos and evidence-based weekly updates, brag documents built from evidence the user verifies, research notes with verdicts, dated sources and independently verified claims, session handoffs a fresh session can resume from, and compound learnings routed to the cheapest durable place.",
-  "license": "MIT",
-  "author": {
-    "name": "hyperscaler-skills contributors"
-  }
-}
