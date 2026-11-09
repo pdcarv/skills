@@ -13,7 +13,7 @@ Writing skills: design docs and ADRs for decisions, runbooks for on-call, memos 
 
 Typical flow: `design-doc` for how, then `adr` for individual decisions over time; weekly updates from `memo` feed `brag`; `learnings` when a task finishes.
 
-Related skills in other plugins: `grill`, `review` and `research` (programming), `diagnose` (debugging-performance), `create-slo` (sre).
+Related skills in other plugins: `grill`, `review`, `research` and `diagnose` (programming), `create-slo` (sre).
 
 Numeric limits and prices are examples with the date they were read; always check the current value. Facts come only from the library's research notes; where the notes had nothing, the skill says so.
 

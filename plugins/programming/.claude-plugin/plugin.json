@@ -1,7 +1,7 @@
 {
   "name": "programming",
   "version": "1.0.0",
-  "description": "Engineering process skills for agents: spec interviews that end in SPEC.md with executable acceptance checks, red/green TDD with confirmed failing tests, code review to Google's code-health standard with verified findings, judge-first large-scale migrations, timeout/retry/overload reviews, research notes with dated sources, and session handoffs a fresh session can resume from.",
+  "description": "Engineering process skills for agents: spec interviews that end in SPEC.md with executable acceptance checks, root-cause debugging with a failing reproduction test and git bisect, red/green TDD with confirmed failing tests, code review to Google's code-health standard with verified findings, judge-first large-scale migrations, timeout/retry/overload reviews, research notes with dated sources, and session handoffs a fresh session can resume from.",
   "author": {
     "name": "hyperscaler-skills contributors"
   },

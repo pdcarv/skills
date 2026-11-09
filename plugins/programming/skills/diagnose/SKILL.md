@@ -7,17 +7,17 @@ description: >-
   fails, a bug is reported, behaviour is unexpected, "it used to work", a fix did not hold,
   a race, timing or async bug reproduces but cannot be explained by reading the code, or a
   performance regression appeared between two known versions. Stops after three failed
-  fixes and raises the architecture question with the human. Not for live production
-  impact: mitigate that first.
+  fixes and raises the architecture question with the human. Not for bugs whose cause is
+  already known (tdd).
 license: MIT
 metadata:
-  category: "debugging-performance/method"
+  category: "programming/method"
   sources: "see Sources section"
 ---
 
 # Diagnose
 
-Turn "it's broken" into a confirmed root cause, a failing test that proves it, one targeted fix, and a clean tree. The rule this skill enforces is the superpowers iron law: "NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST". Every step produces evidence that the next step depends on; a guess is never promoted to a fix without it.
+Turn "it's broken" into a confirmed root cause, a failing test that proves it, one targeted fix, and a clean tree. The rule this skill enforces: no fix without root-cause investigation first. Every step produces evidence that the next step depends on; a guess is never promoted to a fix without it.
 
 **Side effects:** Writes the reproduction test and, after the user's approval, temporary marked instrumentation and the fix in the user's working tree, a debug log in a scratch file, and runs bisect in a throwaway `git worktree` under a scratch directory; reads only the local repository, its history and test output. Never stages, commits or pushes, never posts to a ticket or change description, and never changes production.
 
@@ -30,7 +30,7 @@ Turn "it's broken" into a confirmed root cause, a failing test that proves it, o
 
 ## When not to use
 
-- Users are affected in production right now: mitigate first (divert traffic, shed load, roll back), preserve evidence, then come back here.
+- The cause is already known: write the failing test and fix it with `tdd`.
 
 ## Inputs to gather
 
@@ -39,7 +39,7 @@ Turn "it's broken" into a confirmed root cause, a failing test that proves it, o
 - The last known good version, commit, build or date, if any.
 - What touched it last: recent commits (`git log`, `git diff`), dependency bumps, config, environment, data or load changes.
 - The project's exact test command and how to run a single test.
-- Where the code runs (local, CI, staging, production) and whether you are allowed to add logging there.
+- Where the failure was seen (local, CI, staging, production) and whether it reproduces locally or in CI, the only places the agent runs or instruments code.
 
 ## Procedure
 
@@ -53,7 +53,7 @@ Turn "it's broken" into a confirmed root cause, a failing test that proves it, o
    - Trace the bad value backward from where it is observed to where it was first produced; fix at the source, not where it surfaced.
    - Find similar code that works. Read the reference implementation completely and list every difference, however small.
    - Simplify and reduce: feed known inputs at an interface and shrink the case until removing anything makes the bug disappear.
-7. **Collect runtime evidence when reading is not enough** (the Cursor Debug Mode pattern, done by hand in any tool):
+7. **Collect runtime evidence when reading is not enough:**
    1. Write down several competing hypotheses.
    2. For each, draft log statements that would confirm or refute it. Tag every line with a unique marker (for example `DBG-7f3a H1`) and log the values, thread or task identity, and timestamps the hypothesis depends on.
    3. Ask before adding any: show the user the files, the lines and the marker, and wait for their OK. Further instrumentation needs a new OK.

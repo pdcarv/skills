@@ -1,6 +1,6 @@
 # Taxonomy
 
-Six plugins, one per major category. Teams enable only the plugins they need, because every enabled skill's description is loaded into context on every turn.
+Five plugins, one per major category. Teams enable only the plugins they need, because every enabled skill's description is loaded into context on every turn.
 
 Cloud-specific detail lives in per-cloud reference files (`references/aws.md`, `references/gcp.md`, `references/azure.md`) inside each skill, loaded only when needed.
 
@@ -19,7 +19,7 @@ Cloud-specific detail lives in per-cloud reference files (`references/aws.md`, `
 | programming | Resilience | resilience | Audit timeouts, retries, backoff, budgets, idempotency and load shedding |
 | programming | Knowledge | research | Investigate a question and leave a verdict-first, sourced research note |
 | programming | Knowledge | handoff | Hand off a session's state to a fresh session or person |
-| debugging-performance | Method | diagnose | Root cause before fix, with runtime evidence and bisect |
+| programming | Method | diagnose | Root cause before fix, with runtime evidence and bisect |
 | sre | Reliability | create-slo | Define SLOs and multiwindow burn-rate alerts |
 | sre | Reliability | team-toil | Find and rank toil to automate |
 | training | Cycling | cycling | Plan interview, per-session review and adaptation for one road cyclist |

@@ -7,4 +7,4 @@ Skills for keeping on-call sustainable: SLOs and toil. Built from public Google 
 | `create-slo` | Reliability | Define SLOs and multiwindow, multi-burn-rate alerts |
 | `team-toil` | Reliability | Find, measure and rank toil to automate or eliminate |
 
-Related skills in other plugins: `runbook` (documentation), `diagnose` (debugging-performance).
+Related skills in other plugins: `runbook` (documentation), `diagnose` (programming).

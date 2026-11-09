@@ -34,7 +34,7 @@ The skill is read-only toward the pull request and the user's working tree. It n
 
 - No code yet, only a design: use `design-doc` (documentation).
 - The question is how to ship safely, not whether the code is right: out of scope; this skill does not cover rollout.
-- A bug investigation: use `diagnose` (debugging-performance).
+- A bug investigation: use `diagnose`.
 
 ## Inputs to gather
 
@@ -85,7 +85,7 @@ The skill is read-only toward the pull request and the user's working tree. It n
 ## Gotchas
 
 - **Reviewers over-report.** Anthropic's docs warn that a reviewer asked to find gaps usually reports some even when the work is sound. In a Feb 2026 study, GPT-4o falsely rejected correct code 26.2% (HumanEval) and 35.9% (MBPP) of the time with a minimal prompt, rising to 73.2% and 87.9% with a richer judge-justify-fix prompt. More elaborate review prompts made it worse.
-- **Executing the fix is the best filter found.** In the same study, running the reviewer's proposed fix against tests cut average false rejection from 54.8% to 16.3% on HumanEval. Cursor's Bugbot used multiple passes with majority voting plus a validator model for the same reason.
+- **Executing the fix is the best filter found.** In the same study, running the reviewer's proposed fix against tests cut average false rejection from 54.8% to 16.3% on HumanEval. Multiple reviewer passes with majority voting, plus a validator, cut false findings for the same reason.
 - **Self-preference bias is contested.** One 2026 study across 20 models found judges favour their own outputs; another found authoring models rejected verified-good fixes at about the same rate as fresh models. Neither tested code. A fresh-context reviewer is cheap insurance either way.
 - **Style as a blocker.** Outside the style guide, style is preference. Blocking on it slows teams and teaches authors to ignore review.
 - **Perfection as the bar.** The standard is "better", not "perfect". Remaining improvements go in Nits or follow-up issues.

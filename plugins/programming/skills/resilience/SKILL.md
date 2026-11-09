@@ -31,7 +31,6 @@ Walk every remote call in a path and check it against the AWS Builders' Library 
 
 ## When not to use
 
-- Users are being hurt right now: mitigate first, then review.
 - AZ, Region or tenant blast radius rather than per-call behaviour: out of scope.
 
 ## Inputs to gather

@@ -2,13 +2,12 @@
   "name": "claude-skills",
   "owner": { "name": "pdcarv" },
   "metadata": {
-    "description": "Agent Skills: documentation, programming, debugging and SRE, plus personal training and investing skills.",
+    "description": "Agent Skills: documentation, programming and SRE, plus personal training and investing skills.",
     "version": "1.0.0"
   },
   "plugins": [
     { "name": "documentation", "source": "./plugins/documentation", "description": "Design docs, ADRs, runbooks, narrative memos and status updates, brag documents, learnings." },
-    { "name": "programming", "source": "./plugins/programming", "description": "Spec interviews, red/green TDD, code review to Google's standard, large-scale migrations, timeout and retry reviews, research notes, session handoffs." },
-    { "name": "debugging-performance", "source": "./plugins/debugging-performance", "description": "Systematic debugging: hypothesis and evidence loop, failing reproduction test, runtime instrumentation, git bisect." },
+    { "name": "programming", "source": "./plugins/programming", "description": "Spec interviews, root-cause debugging, red/green TDD, code review to Google's standard, large-scale migrations, timeout and retry reviews, research notes, session handoffs." },
     { "name": "sre", "source": "./plugins/sre", "description": "SLO burn-rate alerts, toil audits." },
     { "name": "training", "source": "./plugins/training", "description": "Cycling coaching: plan interview, per-session review and evidence-graded adaptation, with athlete state kept in a private folder." },
     { "name": "investing", "source": "./plugins/investing", "description": "Value-investing analysis: verified inputs, screens, scenario and reverse DCF, Kelly sizing, thesis journal and review." }

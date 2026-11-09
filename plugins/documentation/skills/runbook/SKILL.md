@@ -28,7 +28,7 @@ Produce a runbook that a tired on-call engineer, or an agent, can follow during 
 
 ## When not to use
 
-- Live incident in progress: out of scope; mitigate first and update the runbook afterwards.
+- Live incident in progress: out of scope; write or update the runbook after the incident.
 - Defining the alerts themselves: use `create-slo`.
 
 ## Inputs to gather

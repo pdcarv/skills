@@ -47,7 +47,7 @@ Every's compound-engineering loop ends each task with a "compound" step: record 
 ## Procedure
 
 1. **List candidate lessons.** For each: what went wrong, the root cause, the fix, and what would have prevented it. Evidence: the diff, command output or quoted correction for each.
-2. **Drop what does not need to persist.** Remove a lesson if the agent can find it by reading the code, if it was a one-off, or if it is something the model already does by default. Anthropic's test for CLAUDE.md is whether Claude could find it in the code or would otherwise have to rediscover it each session; Cursor adds rules only after a repeated mistake.
+2. **Drop what does not need to persist.** Remove a lesson if the agent can find it by reading the code, if it was a one-off, or if it is something the model already does by default. Keep it only if the agent would otherwise rediscover it each session or repeat the mistake.
 3. **Route each surviving lesson to one place** (first match wins):
 
    | The lesson is... | Put it in | Why |

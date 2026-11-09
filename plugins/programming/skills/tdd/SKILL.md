@@ -25,7 +25,7 @@ Give the implementing agent a target it cannot argue with: tests that fail now, 
 ## When to use
 
 - Implementing a feature or behaviour change with a clear expected input and output.
-- Fixing a bug: the failing test is the reproduction (pair with `diagnose` in debugging-performance for finding the cause).
+- Fixing a bug: the failing test is the reproduction (pair with `diagnose` for finding the cause).
 - Turning SPEC.md acceptance criteria into executable checks, or executing a spec's slices in a fresh build session (see `grill`).
 - Splitting work so one agent or session writes tests and another writes the code.
 
@@ -87,7 +87,7 @@ Show, do not assert:
 - **Observation instead of assertion.** A 2026 study of SWE-bench Verified runs found agent tests were mostly value-printing; relational assertions were only about 3-8% of assertions, and how often an agent wrote tests was not linked to whether it solved the task. Count assertions, not tests.
 - **Failing for the wrong reason.** A red caused by a missing import or bad fixture turns green after any change. Read the failure message.
 - **Dropped or weakened tests.** In Armin Ronacher's agent-driven port, the agent dropped "must fail" tests and regressed semantics until steered back. Kent Beck lists disabled tests and unrequested features as warning signs in augmented coding (from a summary of his essay). Diff the test files every time.
-- **Mocks that test the mock.** Mocking the unit under test proves the mock works. Cursor's TDD recipe says explicitly to state there are no mocks.
+- **Mocks that test the mock.** Mocking the unit under test proves the mock works. State in the prompt that the unit under test must not be mocked.
 - **Tests through private internals.** They break on every refactor and pin implementation, not behaviour. Go through the public interface.
 - **Tests for impossible cases.** Anthropic notes that chasing every reviewer finding produces tests for cases that cannot happen. Test the specified behaviour and real edges.
 - **Self-grading.** The writer of the code is biased toward its own work. Where possible, one agent or session writes the tests and another writes the code, or a fresh-context reviewer checks the tests against the spec.
