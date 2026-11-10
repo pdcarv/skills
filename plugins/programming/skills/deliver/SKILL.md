@@ -19,13 +19,13 @@ metadata:
 
 The team's main workflow for building software with agents. You are the orchestrator: you hold the spec, the plan and the shared brief, you hand each piece of work to an agent with a fresh context, and you check what comes back. The user approves every phase boundary. Two rules run through every phase: make the smallest change that meets the spec, and write code for a human reader, who holds far fewer things in working memory than an agent and loses the thread with each jump to another file.
 
-**Side effects:** writes SPEC.md (through `grill`), code, tests and docs in the user's working tree, and runs the project's tests, coverage, linters and analyzers. Sends repository code to subagents; may web-search for the language's style guide. Installs a tool (lizard, a mutation tester, a scanner) only after the user approves. Never stages, commits, pushes, opens a PR or changes git history: the user commits.
+**Side effects:** writes SPEC.md (through `grill`), DELIVERY.md beside it (the phase log), code, tests and docs in the user's working tree, and runs the project's tests, coverage, linters and analyzers. Sends repository code to subagents; may web-search for the language's style guide. Installs a tool (lizard, a mutation tester, a scanner) only after the user approves. Never stages, commits, pushes, opens a PR or changes git history: the user commits.
 
 ## When to use
 
 - Building a feature, behaviour change or small project with agents, from a ticket, a spec or a one-line idea.
 - The user asks for the full workflow, or for one phase of it.
-- Resuming: SPEC.md exists and its slices table has unticked rows.
+- Resuming: SPEC.md exists and its slices table has unticked rows, or DELIVERY.md names a next phase.
 
 ## When not to use
 
@@ -39,6 +39,7 @@ The team's main workflow for building software with agents. You are the orchestr
 Read before asking anything; never ask what the repository answers.
 
 - `CLAUDE.md` or `AGENTS.md`, README, CONTRIBUTING, CI config, Makefile or package scripts, and the code around the change.
+- Which tools are already available. For every tool a phase needs (coverage, mutation tester, complexity, scanners), run `command -v <tool>` or `<tool> --version` first, including the project's virtualenv and tool runners. Propose an install only for what is missing.
 - The project's test, coverage, lint, format and analyzer commands. Run the full suite once and record the baseline: command, counts, pre-existing failures. Record `git rev-parse HEAD` and `git status --short` so you can show at the end that nothing was committed.
 - The style guide: the repo's own (STYLE.md, CONTRIBUTING, linter and formatter config) first; if there is none, the language's guide from `references/toolbox.md`, confirmed by a web search for its current URL. Record which one, and why.
 - The document the user gave (ticket, issue, spec), if any.
@@ -47,6 +48,10 @@ Read before asking anything; never ask what the repository answers.
 ## Procedure
 
 **Gate rule, every phase.** End each phase with a gate message (template in Output): what was done, the evidence (commands and results), what is open, and the proposed next phase with its plan. Then wait. Do not start the next phase without approval. When the user names a phase, check its entry condition first (for example, phase 4 needs a green suite) and say if it does not hold.
+
+**State rule, every phase.** Keep the delivery's state in files, not in your context. Once a gate is approved, append the phase's entry to DELIVERY.md (template in Output) and tell the user the next phase can start in a fresh session (`/clear`, then `/deliver continue`). When resuming, read SPEC.md and DELIVERY.md, and only the code the next phase needs; never ask what DELIVERY.md records.
+
+**Lean rule, every phase.** Your context is re-read on every step, so keep it small. Run commands with quiet output and read only the failures. Agents read files and diffs and return short reports; read code yourself only where a report points.
 
 **Delegation rule, every phase.** Implementation, test writing, pen-testing and reviewing are done by subagents with fresh context, never in your own context. Your context holds the spec, the plan and the evidence. A subagent knows only its brief, so build each brief from the templates in `references/briefs.md` and paste the same **style brief** into every one of them.
 
@@ -66,9 +71,9 @@ Read before asking anything; never ask what the repository answers.
 
 1. **Slice by deliverable.** Each slice is vertical (something a user or a test can observe on its own), small, and independent where possible (INVEST). Order slices by risk: the most uncertain part first, or a walking skeleton through every module first when the risk is integration. Each slice is the smallest change that passes its acceptance checks; anything not needed for them is out.
 2. **Map overlap.** For each slice, list the files and interfaces it creates or changes and the slices it depends on. Slices with disjoint file sets and no dependency run in parallel; the rest run in order. When parallel slices share a new type or interface, define it first in a short sequential "contract" step, so agents build against the same shape.
-3. **Write the style brief once** (`references/briefs.md`): the guide and its handful of rules that matter here, conventions observed in the code, the pattern file to copy, the principles (smallest change, no speculative abstraction, no new dependency without approval), and the exact test, lint and format commands.
+3. **Write the style brief once** (`references/briefs.md`) and save it at the top of DELIVERY.md: the guide and its handful of rules that matter here, conventions observed in the code, the pattern file to copy, the principles (smallest change, no speculative abstraction, no new dependency without approval), and the exact test, lint and format commands.
 4. **Fan out.** One implementer agent per slice, parallel slices in the same turn. Each brief gives the slice, its acceptance checks, the files it may and may not touch, the style brief, and its done condition: its own checks pass, lint is clean on its files, and it reports the files it changed. Parallel agents share one working tree, so none of them runs the full suite: each would see the others' half-finished work fail.
-5. **Integrate each wave yourself.** Run the full suite and the linters. Read every change, including new files: nothing is staged, so use `git status --porcelain --untracked-files=all` and `git diff HEAD`, not `git diff --stat` alone. Check each agent stayed inside its files and added no unrequested features. Send problems back to a fresh agent with the failing output; do not patch them in your own context. Tick the slice in SPEC.md with its verification line.
+5. **Integrate each wave yourself.** Run the full suite and the linters. List every changed and new file (`git status --porcelain --untracked-files=all`; nothing is staged, so new files never show in `git diff`) and check each is inside its slice's allowed files. Give the full diff (`git diff HEAD` plus the new files) to a fresh verifier agent (`references/briefs.md`) with the slices' acceptance checks and allowed files; it reports, with file:line, anything outside scope, any unrequested feature and any check not met. Read the code yourself only where it points. Send problems back to a fresh agent with the failing output; do not patch them in your own context. Tick the slice in SPEC.md with its verification line.
 6. **Iterate per deliverable when it helps.** If slices are deliverables the user wants to see before the next ones are built, stop after each wave with a short gate.
 7. **Gate:** all slices ticked, suite green against the baseline.
 
@@ -104,6 +109,7 @@ Before each gate, and in the final report, show:
 - The full suite against the baseline: counts, and no new skips, xfails or ignores.
 - Every slice ticked in SPEC.md with how it was verified; every changed or new file (`git status --porcelain --untracked-files=all`) inside some slice's allowed files.
 - One style brief, pasted the same into every brief (say how many agents got it).
+- DELIVERY.md has an entry for every approved phase.
 - Tests: each one is named as a behaviour and contains no loops, conditionals or computed expected values; branch coverage of the changed code; the mutation score with surviving mutants explained.
 - `git rev-parse HEAD` unchanged from the start and nothing staged by you (`git diff --staged` empty, or exactly what the user staged).
 
@@ -132,6 +138,23 @@ Changed: <files or slices>
 Open: <questions, risks, deferred items, or none>
 Next: Phase <n+1> <name>. Plan: <slices and parallel waves | proposals | agents and lenses>
 Approve to continue?
+```
+
+DELIVERY.md (append one entry per approved phase):
+
+```markdown
+# Delivery log: <feature>
+Spec: SPEC.md   Baseline: `<cmd>` <p/f/s>   Start HEAD: <hash>
+
+## Style brief
+<the style brief, verbatim>
+
+## Phase <n>: <name> (approved <date>)
+Evidence: `<command>` -> <result>; ...
+Numbers: <every figure this gate produced: tests p/f/s, branch coverage, mutation score, CRAP top 3, findings per round and lens; or none>
+Decisions: <what the user decided at this gate>
+Open: <questions, risks, deferred items, or none>
+Next: Phase <n+1> <name>
 ```
 
 Final report:
