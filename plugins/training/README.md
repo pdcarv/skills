@@ -8,16 +8,16 @@ Endurance training skills. Each skill keeps the athlete's data in a private fold
 
 ## Setup
 
-The athlete's data lives in the vault at `<private-folder>/training/cycling/state/`. Link it into the skill once per clone:
+The athlete's data lives in a private folder outside this repository (`<private-folder>` below, readable only by you). Link it into the skill once per clone:
 
 ```bash
 ln -s <private-folder>/training/cycling/state plugins/training/skills/cycling/state
 ```
 
-The link is ignored by git. To use the skill in claude.ai, build an upload that bundles the current state:
+The link is ignored by git. To use the skill in claude.ai, build an upload. Uploads leave `state/` out unless you add `--with-state`, which sends your health and training data to your claude.ai account:
 
 ```bash
-scripts/package_skill.sh plugins/training/skills/cycling
+scripts/package_skill.sh --with-state plugins/training/skills/cycling
 ```
 
 ## Tests

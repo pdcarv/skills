@@ -1,6 +1,6 @@
 # State
 
-The user's private investing data lives in `state/` (a link to a private folder, for example `<private-folder>/investing/state/`; in a claude.ai upload, a bundled copy). This file defines every file that may exist there, which procedure may write it, and its shape.
+The user's private investing data lives in `state/` (a link to a private folder outside the repository; in a claude.ai upload, a bundled copy). This file defines every file that may exist there, which procedure may write it, and its shape.
 
 ## Rules
 

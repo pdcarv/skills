@@ -23,7 +23,7 @@ Run scripts from this skill's directory. They use the Python standard library on
 python3 scripts/valuation.py --help
 ```
 
-Then list `state/`. In Claude Code and Cursor it is a link to the user's private investing folder (for example `<private-folder>/investing/state/`); in a claude.ai upload it is a bundled copy. Read `state/context.md` before any portfolio, sizing or tax-sensitive answer.
+Then list `state/`. In Claude Code and Cursor it is a link to the user's private investing folder; in a claude.ai upload it is a bundled copy. Read `state/context.md` before any portfolio, sizing or tax-sensitive answer.
 
 ## Pick the procedure
 

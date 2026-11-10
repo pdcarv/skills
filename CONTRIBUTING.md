@@ -18,7 +18,7 @@ Skills in these plugins are stateful and self-contained, so two layout rules rel
 - Extra folders are allowed, for example `roles/` (reasoning stances) and `state/`.
 - The body section order below is not required. Frontmatter and portability rules still apply, and `scripts/check_skill.py` skips only the section check for these plugins.
 
-Personal data never enters git. `state/` is a link to a private folder (for `cycling`, `<private-folder>/training/cycling/state/`; for `valuation`, `<private-folder>/investing/state/`) and is listed in `.gitignore`. Development-only files (test suites, fixtures) live in `plugins/<plugin>/tests/<skill>/`, outside the skill folder.
+Personal data never enters git. `state/` is a link to a private folder outside the repository, chosen by each user, and is listed in `.gitignore`. Development-only files (test suites, fixtures) live in `plugins/<plugin>/tests/<skill>/`, outside the skill folder.
 
 ## Frontmatter (portable subset of the Agent Skills spec only)
 

@@ -54,10 +54,12 @@ The first test recomputes the answer, hides two behaviours in a loop, and passes
 
 ## Mutation testing: tools and commands
 
+Default: use a tool only if it is already installed; otherwise mutate by hand (SKILL.md, Phase 3 step 5).
+
 | Language | Tool | Run | Scope to the change |
 |---|---|---|---|
 | Python | mutmut | `mutmut run`, then `mutmut browse` (Linux and macOS; Windows only via WSL) | `paths_to_mutate` in `[tool.mutmut]` (a config entry: propose it) |
-| JS / TS | StrykerJS | `npm init stryker@latest` once, then `npx stryker run` | `--mutate "<file>:<lines>"` (check the current docs) |
+| JS / TS | StrykerJS | `npx stryker run` if installed (setting it up runs `npm init stryker`, which edits `package.json`: propose it) | `--mutate "<file>:<lines>"` (check the current docs) |
 | C# | Stryker.NET | see stryker-mutator.io | see docs |
 | Scala | Stryker4s | see stryker-mutator.io | see docs |
 | Java | PIT | `mvn test-compile org.pitest:pitest-maven:mutationCoverage` (report in `target/pit-reports/`) | `-DtargetClasses=<classes>` (unverified) |

@@ -15,6 +15,8 @@ mkdir -p <private-folder>/investing/state
 ln -s <private-folder>/investing/state plugins/investing/skills/valuation/state
 ```
 
+Replace `<private-folder>` with a folder outside this repository that only you can read.
+
 Put your standing constraints (tax residence, broker and venues, base currency, portfolio style, tolerable drawdown) in `state/context.md`. Everything else is created by the skill's procedures, only when there is something to record.
 
 ## Tests

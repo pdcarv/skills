@@ -42,7 +42,7 @@ install the packages themselves); once they agree, run those scripts as
 rather than skipping them.
 
 Then list `state/`. In Claude Code and Cursor it is a link to the athlete's
-private folder `<private-folder>/training/cycling/state/`; in a claude.ai upload it is a
+private folder outside the repository; in a claude.ai upload it is a
 bundled copy. An empty `state/` means no plan exists yet.
 
 ## Pick the procedure

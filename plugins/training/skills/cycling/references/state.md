@@ -1,6 +1,6 @@
 # State
 
-The athlete's data lives in `state/` (a link to `<private-folder>/training/cycling/state/`).
+The athlete's data lives in `state/` (a link to a private folder outside the repository).
 This file defines every file that may exist there, which procedure may write it,
 and its schema.
 
