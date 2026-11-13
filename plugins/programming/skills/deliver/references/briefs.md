@@ -83,7 +83,7 @@ Failing output: <command and output>
 Relevant spec lines: <...>
 Files you may change: <paths>
 <style brief>
-Done when: `<failing command>` passes and the full suite passes.
+Done when: `<failing command>` passes, and no test that passed before now fails.
 ```
 
 ## Verifier
@@ -93,7 +93,7 @@ You check work other agents did. You did not write it; read it as a reviewer.
 What to check: <the diff and new files | the findings list with their reproductions>
 Against: <acceptance checks and allowed files per slice | the code at HEAD plus the working tree>
 For each item report one line: file:line, what is wrong or what you confirmed, and the evidence (command and output).
-Run anything in a scratch copy (`cp -R` to a temp directory), never in the working tree.
+Run anything in a scratch copy in a temp directory, never in the working tree.
 Report only what you checked; say "none" if you found nothing.
 ```
 

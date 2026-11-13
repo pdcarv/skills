@@ -19,7 +19,7 @@ metadata:
 
 Turn "it's broken" into a confirmed root cause, a failing test that proves it, one targeted fix, and a clean tree. The rule this skill enforces: no fix without root-cause investigation first. Every step produces evidence that the next step depends on; a guess is never promoted to a fix without it.
 
-**Side effects:** Writes the reproduction test and, after the user's approval, temporary marked instrumentation and the fix in the user's working tree, a debug log in a scratch file, and runs bisect in a throwaway `git worktree` under a scratch directory; reads only the local repository, its history and test output. Never stages, commits or pushes, never posts to a ticket or change description, and never changes production.
+**Side effects:** Writes the reproduction test and, after the user's approval, temporary marked instrumentation and the fix in the user's working tree, a debug log in a scratch file, and runs bisect in a throwaway `git worktree` under a scratch directory; Never stages, commits or pushes, never posts to a ticket or change description, and never changes production.
 
 ## When to use
 

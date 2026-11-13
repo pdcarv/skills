@@ -1,6 +1,6 @@
 # Toolbox: style guides and commands per language
 
-Use this when the repository has no style guide of its own, and to fill the commands in the style brief. Prefer what the repo already configures (CI, Makefile, pre-commit, package scripts) over anything here. Confirm a guide's current URL with a web search before you cite it in a brief. Versions and URLs change.
+Use this when the repository has no style guide of its own, and to fill the commands in the style brief. Prefer what the repo already configures (CI, Makefile, pre-commit, package scripts) over anything here. Versions and URLs change.
 
 ## Contents
 
@@ -29,7 +29,7 @@ Pick three to six rules that matter for this change (naming, error handling, fun
 | Rust | `cargo fmt` | `cargo clippy` |
 | JS / TS | project's prettier config | project's eslint config |
 
-## Coverage commands (also read by `refactor`)
+## Coverage commands
 
 | Language | Command | Report `refactor/scripts/crap.py` reads |
 |---|---|---|
