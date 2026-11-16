@@ -1,7 +1,7 @@
 {
   "name": "sre",
   "version": "1.0.0",
-  "description": "SRE skills: SLOs with multiwindow burn-rate alerts, and toil audits.",
+  "description": "SRE skills: SLOs with multiwindow burn-rate alerts.",
   "author": {
     "name": "hyperscaler-skills contributors"
   },
