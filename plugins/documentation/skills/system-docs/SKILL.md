@@ -76,6 +76,10 @@ A maintainer opens this doc to change the system safely. They need the ideas the
 
 ## Output
 
+Prose rules for every document:
+
+- Keep sentences under 25 words. Cut sentences that only announce or summarise.
+
 ````markdown
 # <System or feature>
 <One paragraph: what it does, for whom, and its boundaries (what it does not do).>

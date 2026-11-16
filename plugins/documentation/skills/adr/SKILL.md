@@ -75,6 +75,11 @@ Capture one decision in a short, append-only record so future readers know what 
 
 ## Output
 
+Prose rules for every document:
+
+- Keep sentences under 25 words. Cut sentences that only announce or summarise.
+- At a term's first appearance, define it in the same sentence, e.g. "the PSP (external payment provider)". Use only that word afterwards.
+
 ```markdown
 # ADR <n>: <short noun-phrase title>
 

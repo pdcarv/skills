@@ -80,6 +80,11 @@ A brag document keeps an accurate, evidence-linked list of work and what it chan
 
 ## Output
 
+Prose rules for every document:
+
+- Keep sentences under 25 words. Cut sentences that only announce or summarise.
+- At a term's first appearance, define it in the same sentence, e.g. "the PSP (external payment provider)". Use only that word afterwards.
+
 ```markdown
 # Brag document: <name>, <period>
 Last updated: <date>

@@ -95,6 +95,11 @@ Produce a runbook that a tired on-call engineer, or an agent, can follow during 
 
 ## Output
 
+Prose rules for every document:
+
+- Keep sentences under 25 words. Cut sentences that only announce or summarise.
+- At a term's first appearance, define it in the same sentence, e.g. "the PSP (external payment provider)". Use only that word afterwards.
+
 ```markdown
 # <service>-debugging runbook
 Owners: <team>  On-call: <rotation link>  Last reviewed: <date>  Last drilled: <date>
