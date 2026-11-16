@@ -36,8 +36,9 @@ Order, most upstream first:
    the rider reports that unstructured riding beat a structured plan, record
    it under `history.what_worked` and treat it as evidence about load, volume
    or intensity, not as an anecdote to override.
-3. **Availability.** Hours per week the rider can sustain, not hope for; fixed
-   days; indoor vs outdoor; travel in the plan window.
+3. **Availability.** Hours per week the rider can sustain, not hope for; a
+   default week (minutes per day); fixed days; indoor vs outdoor; travel in
+   the plan window.
 4. **Health screening** (section 3).
 5. **Equipment and data.** Power meter(s) and crank lengths (they affect
    comparisons between bikes), trainer, HR strap or optical, HRV device, the
@@ -101,7 +102,8 @@ Work from the target event backwards.
    help VO2max in short blocks or highly trained athletes. Label the choice
    contested, with its evidence level.
 2. **Volume.** Start from demonstrated recent volume, not stated capacity.
-   Progress from what the rider has actually absorbed.
+   Progress from what the rider has actually absorbed: interval targets move
+   by the progression gate in `references/review.md`.
 3. **Periodisation.** Macrocycle phases to the A-event; blocks of 3-6 weeks
    with one primary goal each; a recovery week rhythm the rider has tolerated.
 4. **Durability work** for events longer than the rider's usual rides: quality
@@ -128,7 +130,9 @@ candidates that differ on settled points.
 3. Present the candidates to the rider, each with the five-part explanation
    (SKILL.md) and the trade-off between them. The rider chooses.
 4. Write `plan.yaml` version 1 (or N+1 on a rebuild, with a changelog entry).
-   Every session target comes from a `zones.py` run id.
+   Every session target comes from a `zones.py` run id. Each interval type
+   with a power target lists `reps`, `ceiling` (most reps this block allows)
+   and `start_reps` (rep count after a target raise), which `gate.py` needs.
 5. Run `scripts/verify_output.py` on the plan summary before showing it.
 6. Report the files written.
 

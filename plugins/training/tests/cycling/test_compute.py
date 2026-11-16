@@ -226,6 +226,27 @@ truth("durability decoupled from threshold in the notes",
       any("independent of VO2max" in n for n in neg["notes"]))
 truth("result routed to tests.yaml as MEASURED", any("tests.yaml" in n for n in neg["notes"]))
 
+print("\ngate.py — progression gate bands and next target")
+o = run("gate.py", "--type", "2min", "--target", "310", "--reps", "314", "307", "297",
+        "--reps-planned", "3", "--ceiling", "4")
+truth("on target, worst rep -4.2% -> progress", o["outputs"]["verdict"] == "progress", o["outputs"]["verdict"])
+truth("progress below ceiling adds a rep", o["outputs"]["next"] == {"target_w": 310.0, "reps": 4}, str(o["outputs"]["next"]))
+o = run("gate.py", "--type", "x", "--target", "300", "--reps", "301", "300", "--reps-planned", "2",
+        "--start-reps", "1")
+close("at ceiling raises target 2.5%", o["outputs"]["next"]["target_w"], 308)
+truth("at ceiling returns to start reps", o["outputs"]["next"]["reps"] == 1, str(o["outputs"]["next"]))
+o = run("gate.py", "--type", "3min", "--target", "320", "--reps", "307", "299", "310", "302", "--reps-planned", "4")
+truth("mean -4.8% -> hold", o["outputs"]["verdict"] == "hold", o["outputs"]["verdict"])
+o = run("gate.py", "--type", "x", "--target", "300", "--reps", "300", "300", "284", "--reps-planned", "3")
+truth("mean -1.8% but a rep -5.3% -> hold", o["outputs"]["verdict"] == "hold", o["outputs"]["verdict"])
+o = run("gate.py", "--type", "3min", "--target", "330", "--reps", "314", "307", "305", "307", "--reps-planned", "4")
+truth("mean -6.6% -> recalibrate", o["outputs"]["verdict"] == "recalibrate", o["outputs"]["verdict"])
+close("recalibrate to rep mean", o["outputs"]["next"]["target_w"], 308)
+o = run("gate.py", "--type", "x", "--target", "300", "--reps", "290", "--reps-planned", "1", "--prior-misses", "1")
+truth("second miss at the same target -> recalibrate", o["outputs"]["verdict"] == "recalibrate", o["outputs"]["verdict"])
+o = run("gate.py", "--type", "x", "--target", "300", "--reps", "300", "--reps-planned", "1", "--prior-misses", "1")
+truth("on target after an earlier miss -> progress", o["outputs"]["verdict"] == "progress", o["outputs"]["verdict"])
+
 print("\nmanifest integration — every script appends a traceable run")
 with tempfile.TemporaryDirectory() as td:
     mf = Path(td) / "m.json"

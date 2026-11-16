@@ -1,15 +1,16 @@
 ---
 name: review
 description: >-
-  Reviews a code change against the Google Engineering Practices review standard (approve once the
-  change definitely improves overall code health; facts over style guide over engineering
-  principles over consistency; "Nit:" for optional comments; an escalation ladder), adds a
-  fresh-context reviewer scoped to correctness and stated requirements, and verifies every
-  finding before it is reported because LLM reviewers over-reject correct code. Also covers
-  receiving review: check each comment against the code, propose fixes for what holds, push back
-  with evidence on what does not. Produces a report and drafts; never posts, approves, edits
-  or commits. Use when asked to review a PR, CL, diff or branch, before
-  merging agent-written code, or when review comments arrive on your own change.
+  Reviews someone else's pull request: first explains it as its author would (problem,
+  approach, how the parts fit, with a diagram where it helps), then checks it against the
+  project's rules (CLAUDE.md, AGENTS.md, CONTRIBUTING, style guide), runs the project's tools
+  and checks on it, and looks for needless complexity and side effects the PR does not state.
+  Judged by Google's review standard (approve once code health improves; facts over style
+  guide over principles over consistency; "Nit:" for optional comments), with a
+  fresh-context reviewer and every finding verified before it is reported. Also covers
+  responding to review comments on your own PR. Produces a report and drafts; never posts,
+  approves, edits or commits. Use when asked to review a PR, CL, diff or branch someone else
+  wrote, or when review comments arrive on your PR.
 license: MIT
 metadata:
   category: "programming/quality"
@@ -26,12 +27,12 @@ The skill is read-only toward the pull request and the user's working tree. It n
 
 ## When to use
 
-- Reviewing a pull request, CL, diff or branch, yours or someone else's, human- or agent-written.
-- A final check before merging agent-written work.
+- Reviewing a pull request, CL, diff or branch someone else wrote, human- or agent-written.
 - Review comments arrived on your change and you must respond (see Procedure, part B).
 
 ## When not to use
 
+- Your own change before merge: `harden`.
 - No code yet, only a design: use `design-doc` (documentation).
 - The question is how to ship safely, not whether the code is right: out of scope; this skill does not cover rollout.
 - A bug investigation: use `diagnose`.
@@ -49,18 +50,21 @@ The skill is read-only toward the pull request and the user's working tree. It n
 ### A. Reviewing a change
 
 1. **Check size and scope first.** If the change mixes unrelated concerns or is too large to read carefully, ask for it to be split before line-by-line review. Small changes are easier to review and cheaper to roll back (SRE Workbook; Willison's PR conventions; DORA lists small batches among its AI capabilities). Google's small-CL guidance: about 100 lines is usually reasonable and about 1000 usually too large, file spread counts too (200 lines across 50 files is usually too large), and a reviewer may reject a change for size alone.
-2. **Check intent.** Does the change do what the requirements say, and only that? A well-built feature nobody asked for can still be rejected.
-3. **Check evidence.** Read the PR description critically (agents write plausible ones) and run or inspect the tests. Missing evidence of the author's own verification is itself a finding.
-4. **Read with depth proportional to risk.** Read load-bearing code (protocols, runtime, data handling, business logic) line by line; skim peripheral code such as styling. For each area, check correctness, tests that assert behaviour, and, before production, the AWS-style checklist items: monitoring coverage, resource impact, alarm behaviour and rollback safety. For a mutating API endpoint, check idempotency: client key, stored first response, error on key reuse with different parameters, concurrent requests. Only once the correctness findings are settled, make a simplification pass: code that duplicates something already in the repository (reuse it), needless indirection, dead code, speculative generality, and changes outside the requirements (flag them for removal). Simplification findings are Nits unless they hide a defect.
-5. **Run an independent reviewer in a fresh context.** Give it only the diff and the requirements, read-only tools plus the project's test and lint commands, and this scope: report gaps that affect correctness or the stated requirements; skip style. It must not see the authoring conversation, so it judges the code, not the author's reasoning. Optional, tool-specific: Claude Code `/code-review` without `--comment` or `--fix`, a subagent with `tools: Read, Grep, Glob, Bash` limited to the test and lint commands, or a second session. A reviewer outside this session (another provider's model or a review service) receives the code: use one only with the user's OK.
-6. **Verify every finding before reporting it** (yours and the reviewer's). Reproduce it: write or run a test that fails, trace the input that triggers it, or point to the exact line and value. Run the project's tests, linters and type checks as needed. Where a fix is proposed, apply it in a throwaway worktree or copy (`git worktree add`), run the tests there, then remove it. Drop findings you cannot substantiate, or downgrade them to questions.
-7. **Label each comment.**
+2. **Explain the change as its author.** Before judging, write the walkthrough the author should have written: the problem, the approach and why, each changed area and how they connect, and a Mermaid component or sequence diagram where the flow crosses modules. Compare it with the PR description (agents write plausible ones); a mismatch is a question or a finding.
+3. **Check intent.** Does the change do what the requirements say, and only that? A well-built feature nobody asked for can still be rejected.
+4. **Check the project's rules.** List each rule in CLAUDE.md, AGENTS.md, CONTRIBUTING and the style guide that the change touches, and whether it holds. A broken written rule is blocking.
+5. **Run the project's checks** in a throwaway worktree of the PR branch: every command CI runs, plus the configured formatters, linters, type checkers and tests. A failure is blocking. Missing evidence of the author's own verification is itself a finding.
+6. **Read with depth proportional to risk.** Read load-bearing code (protocols, runtime, data handling, business logic) line by line; skim peripheral code such as styling. For each area, check correctness, tests that assert behaviour, and, before production, the AWS-style checklist items: monitoring coverage, resource impact, alarm behaviour and rollback safety. For a mutating API endpoint or retried call, check it against `resilience`.
+7. **Side effects, then simplicity.** List every effect beyond the stated purpose: changed public APIs or defaults, new I/O, global or shared state, config, migrations, changed behaviour for existing callers (grep the callers). An unstated side effect blocks until the author confirms it is intended. Once correctness findings are settled, make a simplification pass: code that duplicates something already in the repository (reuse it), needless indirection, dead code, speculative generality, and changes outside the requirements (flag them for removal). Simplification findings are Nits unless they hide a defect.
+8. **Run an independent reviewer in a fresh context.** Give it only the diff and the requirements, read-only tools plus the project's test and lint commands, and this scope: report gaps that affect correctness or the stated requirements; skip style. It must not see the authoring conversation, so it judges the code, not the author's reasoning. Optional, tool-specific: Claude Code `/code-review` without `--comment` or `--fix`, a subagent with `tools: Read, Grep, Glob, Bash` limited to the test and lint commands, or a second session. A reviewer outside this session (another provider's model or a review service) receives the code: use one only with the user's OK.
+9. **Verify every finding before reporting it** (yours and the reviewer's). Reproduce it: write or run a test that fails, trace the input that triggers it, or point to the exact line and value. Run the project's tests, linters and type checks as needed. Where a fix is proposed, apply it in a throwaway worktree or copy (`git worktree add`), run the tests there, then remove it. Drop findings you cannot substantiate, or downgrade them to questions.
+10. **Label each comment.**
    - Blocking: must change before approval, with its justification.
    - `Nit:` optional polish or education; never blocks.
    - Question: you need information, not a change.
-8. **Justify blocking comments by Google's order of authority:** (1) technical facts and data; (2) the style guide, which is absolute on style (outside it, follow existing style, else accept the author's choice); (3) engineering principles, not taste (if the author shows options are equally valid, accept theirs); (4) consistency with the codebase, unless that worsens code health. A preference with none of these behind it is a Nit at most.
-9. **Recommend a verdict.** Recommend approval when the change definitely improves overall code health, even if it is not perfect. Do not recommend approving a change that worsens code health except in an emergency. Do not hold a change for days over small imperfections. Hand back the report and wait: the user decides what gets posted, approved or applied. If a finding reflects a rule worth keeping, suggest `learnings` (documentation).
-10. **Resolve disagreement on the ladder:** seek consensus using these rules; then a call or meeting, with the outcome recorded as a comment on the change; then escalate to the team, tech lead, code owner or manager. Never let a change stall because author and reviewer disagree.
+11. **Justify blocking comments by Google's order of authority:** (1) technical facts and data; (2) the style guide, which is absolute on style (outside it, follow existing style, else accept the author's choice); (3) engineering principles, not taste (if the author shows options are equally valid, accept theirs); (4) consistency with the codebase, unless that worsens code health. A preference with none of these behind it is a Nit at most.
+12. **Recommend a verdict.** Recommend approval when the change definitely improves overall code health, even if it is not perfect. Do not recommend approving a change that worsens code health except in an emergency. Do not hold a change for days over small imperfections. Hand back the report and wait: the user decides what gets posted, approved or applied. If a finding reflects a rule worth keeping, suggest `learnings` (documentation).
+13. **Resolve disagreement on the ladder:** seek consensus using these rules; then a call or meeting, with the outcome recorded as a comment on the change; then escalate to the team, tech lead, code owner or manager. Never let a change stall because author and reviewer disagree.
 
 ### B. Receiving review
 
@@ -78,6 +82,8 @@ The skill is read-only toward the pull request and the user's working tree. It n
 - Every reported defect has a reproduction (failing test, input trace, or executed fix) or is phrased as a question.
 - The fresh-context reviewer's output was triaged, not forwarded raw; dropped findings are listed with the reason.
 - The verdict states which way code health moves and why.
+- The walkthrough explains the change without the PR description; every project rule touched is listed as held or broken; every CI and project check ran in the throwaway worktree.
+- Every effect beyond the stated purpose is listed, and unstated ones are blocking or confirmed.
 - Correctness findings were settled before the simplification pass; simplification findings are Nits unless they hide a defect.
 - When receiving review: every comment has a drafted reply, and the suite was green in the throwaway worktree with the proposed patches applied.
 - Nothing was posted, approved, edited in the user's tree, committed or pushed.
@@ -103,6 +109,18 @@ Recommended verdict: approve | approve with nits | request changes
 Code health: improves | neutral | worsens, because <one line>
 Scope/size: <ok | split into: ...>
 Evidence checked: <tests run, output>
+
+### What this change does
+<the walkthrough, as the author would explain it, with a Mermaid diagram where the flow crosses modules>
+
+### Project rules
+- <rule (file)>: held | broken at <file:line>
+
+### Checks run
+- `<command>` -> <result>
+
+### Side effects
+- <effect>: stated | unstated (blocking until confirmed)
 
 ### Blocking
 1. <file:line> <problem>. Justification: <fact | style guide rule | principle | consistency>. Repro: <test/trace>. Suggested fix: <...>
@@ -142,7 +160,6 @@ Follow the table with one patch per accepted comment, for the user to apply.
 - Thorsten Ball, "How I Prompt" (review depth by how load-bearing the code is), 29 Jul 2026: https://thorstenball.com/talks/how-i-prompt/
 - Armin Ronacher, "Agent Psychosis", 18 Jan 2026: https://lucumr.pocoo.org/2026/1/18/agent-psychosis/ and "The Final Bottleneck", 13 Feb 2026: https://lucumr.pocoo.org/2026/2/13/the-final-bottleneck/
 - AWS Builders' Library, "Automating safe, hands-off deployments" (code review gate and checklist), German locale page, first published Jun 2020: https://aws.amazon.com/de/builders-library/automating-safe-hands-off-deployments/
-- Stripe API reference, idempotent requests, read Oct 2026: https://docs.stripe.com/api/idempotent_requests.md
 - Google SRE Workbook, "Canarying Releases" (small deployments are cheaper to roll back): https://sre.google/workbook/canarying-releases/
 - DORA 2025 State of AI-assisted Software Development (small batches), via InfoQ, 29 Sep 2025: https://www.infoq.com/news/2025/09/dora-state-of-ai-in-dev-2025
 - Ghostty AI_POLICY.md, read Oct 2026: https://github.com/ghostty-org/ghostty/blob/main/AI_POLICY.md

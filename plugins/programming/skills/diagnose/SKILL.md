@@ -7,8 +7,8 @@ description: >-
   fails, a bug is reported, behaviour is unexpected, "it used to work", a fix did not hold,
   a race, timing or async bug reproduces but cannot be explained by reading the code, or a
   performance regression appeared between two known versions. Stops after three failed
-  fixes and raises the architecture question with the human. Not for bugs whose cause is
-  already known (tdd).
+  fixes and raises the architecture question with the human. When the cause is already
+  known, skips straight to the failing test and the fix.
 license: MIT
 metadata:
   category: "programming/method"
@@ -27,10 +27,11 @@ Turn "it's broken" into a confirmed root cause, a failing test that proves it, o
 - A bug reproduces but reading the code does not explain it: races, timing, async ordering, leaks.
 - A regression: it worked at a known version or commit and fails now (functional or performance).
 - A previous fix did not hold, or several attempts have already failed.
+- The cause is already known: run steps 3-4 (reproduce, failing test), then 9-10 (confirm, fix).
 
 ## When not to use
 
-- The cause is already known: write the failing test and fix it with `tdd`.
+- A new feature or behaviour change rather than a defect: `deliver`.
 
 ## Inputs to gather
 
@@ -46,7 +47,7 @@ Turn "it's broken" into a confirmed root cause, a failing test that proves it, o
 1. **Write the problem report.** Record expected vs actual behaviour and reproduction steps in a debug log (a scratch file; for the ticket, draft the text for the user to post). Every later hypothesis, test and result goes in the same log with a timestamp, including negative results.
 2. **Read the evidence completely.** Read the whole error and every frame of the stack trace. Note the first frame in your code, the exact values involved, and any earlier warnings in the same log.
 3. **Reproduce reliably.** Run the reproduction yourself. For an intermittent bug, run it in a loop several times and record the pass/fail ratio; that ratio is your baseline for verification later. If you cannot reproduce, collect more data (step 7) instead of guessing.
-4. **Encode the reproduction as a failing test.** Write the smallest test that fails for the reported reason, run it, and confirm it fails with the expected message, not for an unrelated reason such as a typo or missing fixture. Before touching the implementation, tell the user which test file(s) to stage (do not stage or commit them yourself; git state is the user's), and do not edit the test to make it pass later. This test is the pass/fail check the rest of the work is judged against (see `tdd` in the programming plugin for the full loop).
+4. **Encode the reproduction as a failing test.** Write the smallest test that fails for the reported reason, run it, and confirm it fails with the expected message, not for an unrelated reason such as a typo or missing fixture. Before touching the implementation, tell the user which test file(s) to stage (do not stage or commit them yourself; git state is the user's), and do not edit the test to make it pass later. This test is the pass/fail check the rest of the work is judged against.
 5. **Check what touched it last.** Compare against the last known good state: `git diff <good>..HEAD`, dependency lockfile changes, config and environment differences. If there is a known good commit and the test from step 4 can run unattended, propose a bisect to the user and, once they agree, run it in a throwaway `git worktree` so their checkout and HEAD are untouched: see [references/bisect.md](references/bisect.md). A bisect result is evidence, not yet a root cause.
 6. **Localise.**
    - In a multi-component path, with the user's approval (step 7), log what enters and leaves each component boundary, run once, and find the first boundary where the data is wrong.

@@ -34,6 +34,7 @@ Turn a question into a note that a later planning session, decision or reader ca
 - The answer only matters for one small task: answer it inline and move on.
 - The decision itself is the question: research first, then record the decision with `adr` (documentation).
 - A design with real trade-offs needs writing up: feed this note into `design-doc` (documentation).
+- The answer to "how does this system work?" should become maintainer docs: `system-docs` (documentation).
 
 ## Inputs to gather
 

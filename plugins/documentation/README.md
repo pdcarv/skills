@@ -9,6 +9,8 @@ Writing skills: design docs and ADRs for decisions, runbooks for on-call, memos 
 | `runbook` | Write a `<service>-debugging` runbook: symptoms, read-only checks, mitigations, escalation |
 | `memo` | Amazon-style narrative memos (purpose, background, initiatives, risks and dependencies, appendices, data-backed claims, revision loop, silent-read meeting), short weekly status updates from evidence, and GitLab's async pre-send check. |
 | `brag` | Julia Evans's brag document and two-step workshop: the agent gathers evidence from sources the user names and flags unstated impact; the user verifies every item. |
+| `system-docs` | Maintainer docs for a built system: core concepts mapped to code, Mermaid diagrams, where to change things, invariants. |
+| `tour` | A guided tour of a repository for a newcomer: core domain concepts outward to external systems, one HTML page with an onion diagram. |
 | `learnings` | After a task, route each lesson to the smallest durable place (enforced check, instruction-file line, scoped rule, skill Gotcha, tool, or retrieved `docs/solutions/` note) without bloating always-on instructions. |
 
 Typical flow: `design-doc` for how, then `adr` for individual decisions over time; weekly updates from `memo` feed `brag`; `learnings` when a task finishes.

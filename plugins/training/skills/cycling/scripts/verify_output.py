@@ -235,6 +235,7 @@ def check_numeric(prose, ledger, manifest, profile, allowed, rep: Report) -> Non
     seen: set[tuple[str, str]] = set()
     for val, ctx in nums:
         if val in allowed:
+            rep.add("NUMERIC", INFO, f"{val} passed by allow-comment", ctx)
             continue
         if close_match(val, exact):
             continue
@@ -248,6 +249,7 @@ def check_numeric(prose, ledger, manifest, profile, allowed, rep: Report) -> Non
         unmatched += 1
         rep.add("NUMERIC", ERROR, f"unsourced number {val}", ctx)
     rep.stats["numbers_unsourced"] = unmatched
+    rep.stats["numbers_allowed"] = sum(1 for v, _ in nums if v in allowed)
 
 
 CITE_RE = re.compile(
@@ -450,8 +452,9 @@ BANDS = {
     "°C":     (-30, 60,  r"°C"),
     "rpm":    (0, 250,   r"\brpm\b"),
 }
+# A sign right after a digit is a range dash ("315-335 W"), not a minus.
 QTY_RE = re.compile(
-    r"([-−]?\d+(?:,\d{3})*(?:\.\d+)?)\s*"
+    r"(?<![\d.,])((?:(?<!\d)[-−])?\d+(?:,\d{3})*(?:\.\d+)?)\s*"
     r"(W/kg|mmol/?L|kJ|g/h|bpm|rpm|kg|mm|°C|W)\b"
 )
 

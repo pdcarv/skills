@@ -30,7 +30,7 @@ Make working code easier for the next person to read and change, without changin
 
 ## When not to use
 
-- Tests are red or missing for the code in question: fix or add tests first (`deliver` phase 3, or `tdd`).
+- Tests are red or missing for the code in question: fix or add tests first (`deliver` phase 3).
 - Behaviour must change too: that is a feature; refactor before or after it, never in the same step.
 - A one-off review of someone else's diff: `review` covers simplification findings as Nits.
 

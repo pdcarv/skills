@@ -55,6 +55,7 @@ history:
 availability:
   hours_per_week: ...
   fixed_days: ...                             # days that cannot move
+  default_week: {mon: 60, tue: 0, ...}        # minutes per day, used when placing sessions
   indoor_outdoor: ...
 equipment:
   bikes: [{name, crank_mm, power_meter}]
@@ -125,7 +126,8 @@ versions:
           - week: 1
             sessions:
               - {id: S-02-1-1, day, type, duration_min, targets: "zone or W from zones.py run",
-                 planned_rpe, purpose, fuelling_g_h}
+                 planned_rpe, purpose, fuelling_g_h,
+                 intervals: [{type: "3min surge", target_w, reps, ceiling, start_reps}]}  # gate.py inputs
     taper: {start, length_days, volume_reduction_pct, pattern: progressive|step}
     success_criteria: ["measurable outcome tied to a test protocol"]
 ```
@@ -145,6 +147,8 @@ executed:
   intensity_distribution: {z1_pct, z2_pct, z3_pct, method: hr_time_in_zone | session_goal | power}
   conditions: {temperature_c, indoor, fuelling_g_h, gut_tolerance}
 compliance: {metric, pct, band}               # load.py
+gate:                                         # gate.py, one row per interval type
+  - {type, target_w, mean_w, mean_pct, min_pct, verdict, next: {target_w, reps}, run: R-03, override: null}
 rpe_vs_planned: ...
 wellness_same_day: {sleep_h, soreness, stress, mood}   # only if the rider gave them
 notes: "rider's words"
