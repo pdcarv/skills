@@ -33,6 +33,7 @@ Produce (or review) an informal document, written by the main authors before cod
 - The problem is well understood and a fast prototype would settle the question sooner. Suggest the prototype.
 - The open question is whether to build the product at all, or for whom: settle that first; a design doc assumes it is answered.
 - One decision needs recording, not a whole design: `adr`.
+- Requirements for one change that will be built next: `grill` (it writes SPEC.md).
 
 ## Inputs to gather
 

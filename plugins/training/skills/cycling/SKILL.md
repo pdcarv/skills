@@ -5,7 +5,7 @@ license: MIT
 metadata:
   category: "training/cycling"
   sources: "see Sources section"
-  version: "2026-10-30.1"
+  version: "2026-11-14.6"
 ---
 
 # cycling
@@ -131,6 +131,7 @@ Label anything not verified this session `unverified`.
 | `scripts/power_duration.py`, `cyclingcalc.py cp` | CP and W′ with subset spread |
 | `scripts/durability.py` | Fresh vs fatigued decay at matched kJ |
 | `scripts/load.py` | NP, IF, TSS, sRPE, compliance, RPE vs plan, decoupling, monotony, ACWR |
+| `scripts/gate.py` | Progression gate per interval type: progress, hold or recalibrate, and the next target |
 | `scripts/hrv.py` | 7-day rolling RMSSD against a personal baseline band |
 | `scripts/energy.py` | Energy availability and carbohydrate bands |
 | `scripts/ride_physics.py`, `cyclingcalc.py physics` | Power-speed and pacing on climbs |
@@ -165,6 +166,18 @@ over from `references/frameworks.md` and are `unverified` this session.
   Düking et al., JSAMS, 2021.
 - Durability: Maunder et al., Sports Med, 2021; Jones, J Physiol, 2024; Hunter,
   Maunder, Jones, Gallo & Muniz-Pumares, Exp Physiol, 2025.
+- Progression gate (`references/review.md`), read Nov 2026: Sylta et al., 2016,
+  interval sequence at matched load: https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/2444540 ;
+  Almquist et al., Front Physiol, 2022, reps added within a 3:1 block:
+  https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2022.837634/pdf ;
+  Borszcz et al., Int J Sports Med, 2020, 20-min power reliability:
+  https://www.thieme-connect.de/products/ejournals/abstract/10.1055/a-1018-1965 ;
+  Hopkins, Schabort & Hawley, Sports Med, 2001, reliability of power tests:
+  https://link.springer.com/article/10.2165/00007256-200131030-00005 ;
+  Meeusen et al., ECSS/ACSM overtraining consensus, MSSE, 2013:
+  https://pubmed.ncbi.nlm.nih.gov/23247672/ ; Williamson et al., Int Rev Sport
+  Exerc Psychol, 2022, goal types in sport:
+  https://tandfonline.com/doi/full/10.1080/1750984X.2022.2116723
 - Energy availability: Mountjoy et al., IOC consensus, BJSM, 2023.
 - Tapering: Bosquet et al., MSSE, 2007; Wang et al., PLoS One, 2023.
 - Illness and heat: IOC consensus on acute respiratory illness, BJSM, 2023;

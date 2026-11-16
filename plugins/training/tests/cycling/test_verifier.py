@@ -34,6 +34,10 @@ def check(name, cond, detail=""):
         FAILURES.append(name)
 
 
+def checks_of_report(report, kind="UNITS"):
+    return [f for f in report.findings if f.check == kind and f.severity == "ERROR"]
+
+
 def checks_of(report, kind, severity="ERROR"):
     return [f for f in report["findings"] if f["check"] == kind and f["severity"] == severity]
 
@@ -84,6 +88,11 @@ check("stale costs confidence",
                     "replication": "single", "provenance": "RETRIEVED"}, True)
       < rubric_level({"design": {"type": "RCT"}, "transfer": {"verdict": True},
                       "replication": "single", "provenance": "RETRIEVED"}, False))
+from verify_output import Report, check_units  # noqa: E402
+r_ = Report(); check_units("Ranges 315-335 W and 273–295 W.", r_)
+check("UNITS reads a hyphen range as a range, not a negative", not checks_of_report(r_), str(r_.findings))
+r_ = Report(); check_units("Power fell to −20 W.", r_)
+check("UNITS still fires on a negative power", len(checks_of_report(r_)) == 1, str(r_.findings))
 _, _, allowed = strip_noise("text <!-- allow: 24 reason=structural --> more")
 check("allow-comment parsed", "24" in allowed, str(allowed))
 

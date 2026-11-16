@@ -29,7 +29,7 @@ Migrations are where agents have the strongest published wins, and every one of 
 
 ## When not to use
 
-- A refactor of a handful of files: use `tdd` and normal review.
+- A change to a handful of files: use `deliver` and normal review.
 - No objective oracle exists and none can be built: stop and build tests first; fanning out without a judge produces unverifiable output.
 - The work is mostly redesign rather than translation: write a design doc (`design-doc`, documentation) and migrate only the mechanical part.
 

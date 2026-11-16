@@ -12,9 +12,12 @@ Cloud-specific detail lives in per-cloud reference files (`references/aws.md`, `
 | documentation | Writing | memo | Write an Amazon-style narrative or status update |
 | documentation | Career | brag | Keep a running record of impact for reviews and promotion |
 | documentation | Knowledge | learnings | Turn a finished task's lessons into durable instructions |
+| documentation | Knowledge | system-docs | Write maintainer docs for a built system: concepts, diagrams, invariants |
+| programming | Workflow | deliver | Gated phases from spec to hardened, documented code with agents |
 | programming | Planning | grill | Interview the user until a spec is unambiguous, then write SPEC.md |
-| programming | Quality | tdd | Test-first loop with a confirmed failing test |
-| programming | Quality | review | Review a change to Google's code-health standard, and respond to review |
+| programming | Quality | refactor | Clean up green code by CRAP score, dead code and leftover abstractions |
+| programming | Quality | harden | Make your own change solid: stable suite, tools, scanners, pen-test and review rounds |
+| programming | Quality | review | Explain and review someone else's PR against project rules and checks, and respond to review |
 | programming | Large changes | migrate | Judge-first, rulebook-driven migration fan-out |
 | programming | Resilience | resilience | Audit timeouts, retries, backoff, budgets, idempotency and load shedding |
 | programming | Knowledge | research | Investigate a question and leave a verdict-first, sourced research note |

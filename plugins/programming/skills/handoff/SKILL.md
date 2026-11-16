@@ -34,6 +34,7 @@ A long session holds state that disappears when it ends: why a path was chosen, 
 
 - Handing off incident command during an outage: not covered; that needs a live briefing and explicit acknowledgment, not a file.
 - Recording a lesson that should change future behaviour on every task: use `learnings`.
+- A `deliver` run is in progress (DELIVERY.md exists): add the mid-phase state to DELIVERY.md instead of writing a separate file.
 
 ## Inputs to gather
 
@@ -92,7 +93,7 @@ Save as `<handoff dir>/<YYYY-MM-DD>-<slug>.md`:
 ```markdown
 # Handoff: <task>
 Date: <date>   From: <session/person>   To: <fresh session | name>
-Pick up with: <skill to run first, e.g. tdd, diagnose, research, or none>
+Pick up with: <skill to run first, e.g. deliver, diagnose, research, or none>
 
 ## Goal
 <one paragraph>

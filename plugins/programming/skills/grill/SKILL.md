@@ -57,9 +57,9 @@ Read before asking; never ask the user something the repository answers.
 6. **Play back after each branch.** Summarise the decisions so far in two or three lines and let the user correct them before going deeper. Record every answer in a decisions list as you go.
 7. **Ask for the ambitious version explicitly.** Models read requests conservatively; ask directly whether edge cases, empty and error states, accessibility and keyboard handling are in scope rather than assuming.
 8. **Stop when the tree is closed.** The stop rule: every goal maps to at least one acceptance check, and no remaining question would make two implementers diverge. Anything the user cannot answer now goes under Open questions with an owner; never fill it with a silent guess.
-9. **Write SPEC.md** (or the path the user names, such as `docs/plans/YYYY-MM-DD-<slug>.md` where the repo keeps plans) using the template in Output. Split the work into vertical slices, each one verifiable on its own, and give each its gate: a failing test against a named public seam (confirmed with the user during the interview) for logic, or the exact command or flow that proves it for glue, UI and config. Write acceptance criteria as checks: a test name or command plus the expected result, or input/output pairs a test can assert. Mark any check that cannot be automated as manual and say what evidence proves it (screenshot, curl output, log line).
+9. **Write SPEC.md** (or the path the user names, such as `docs/plans/YYYY-MM-DD-<slug>.md` where the repo keeps plans) using the template in Output. Split the work into vertical slices, each one verifiable on its own, and give each its gate: the exact command or flow that runs its acceptance checks. Write acceptance criteria as checks: a test name or command plus the expected result, or input/output pairs a test can assert. Mark any check that cannot be automated as manual and say what evidence proves it (screenshot, curl output, log line).
 10. **For unattended or handed-off work**, answer these five questions inside the spec: what done looks like, how the agent checks its own work, what it may touch, what stops it (turn or budget cap), and where the result goes and who signs off.
-11. **Get explicit approval**, then hand off. If the interview settled a real decision between alternatives, record it with `adr` (documentation); if it surfaced durable domain facts, propose the addition to the repo's domain notes and write it on approval. Then: build from SPEC.md in a fresh session or by another agent, and later point the reviewer at the same SPEC.md. Optional, Claude Code: `/clear` or a new session; Cursor: save the plan to `.cursor/plans/` if the user wants it kept, and start a new chat.
+11. **Get explicit approval**, then hand off. If the interview settled a real decision between alternatives, record it with `adr` (documentation); if it surfaced durable domain facts, propose the addition to the repo's domain notes and write it on approval. Then: build from SPEC.md with `deliver` in a fresh session or by another agent, and later point the reviewer at the same SPEC.md. Optional, Claude Code: `/clear` or a new session; Cursor: save the plan to `.cursor/plans/` if the user wants it kept, and start a new chat.
 12. **Keep it current.** When a decision changes during the build, edit the spec in place rather than appending amendments, so the reviewer checks against what was actually agreed.
 
 ## Verification
@@ -72,7 +72,7 @@ Before calling the spec done, confirm and show:
 - Open questions each have an owner; none is hidden inside a goal.
 - The user approved the decisions list (quote their confirmation or note the turn).
 - For unattended work, all five unattended-run questions are answered.
-- Every slice has a gate: a named seam for test-driven slices, or an exact command or flow for the rest.
+- Every slice has a gate: an exact command or flow.
 - For medium and large changes, the data model and the module diagram are in the spec and the user approved them; the diagram renders as Mermaid.
 
 ## Gotchas
@@ -134,7 +134,7 @@ flowchart LR
 ## Slices (build in order)
 | # | Change | Gate | Verification | Done |
 |---|---|---|---|---|
-| 1 | <small, concrete> | TDD: <public seam> / E2E: <command> | <expected result> | [ ] |
+| 1 | <small, concrete> | `<command>` or <flow> | <expected result> | [ ] |
 
 ## Context for the build session
 <file paths and facts a fresh agent with no history needs; nothing that is already in the code>

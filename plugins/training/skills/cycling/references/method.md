@@ -133,7 +133,9 @@ week index, an illustrative round figure — are declared inline and audited:
 ```
 
 Every allow-comment appears in the verifier report. If a draft needs many of them,
-that is itself the finding.
+that is itself the finding. An allow-comment never covers a value derived from
+data (a rep mean, a percentage, a fit): compute it with a script so it is in
+the manifest.
 
 ---
 
@@ -202,7 +204,8 @@ and catches the failure classes a model cannot reliably self-police.
 ## Layer 1 — mechanical audit (`scripts/verify_output.py`)
 
 Non-optional for any output containing a numeric prescription, a threshold, a
-dose, or a citation. Exploratory conversation is exempt.
+dose, or a citation. Exploratory conversation is exempt. `--ledger` is needed
+only when the draft cites studies; `--draft` and `--manifest` are the minimum.
 
 ```bash
 W=/tmp/cycling-<slug>          # working folder, outside state/

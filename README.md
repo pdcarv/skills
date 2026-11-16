@@ -4,8 +4,8 @@ Every skill uses only the portable Agent Skills frontmatter (`name`, `descriptio
 
 | Plugin | Skills |
 |---|---|
-| `documentation` | design-doc, adr, memo, runbook, brag, learnings |
-| `programming` | grill, tdd, review, migrate, resilience, research, handoff, diagnose |
+| `documentation` | design-doc, adr, memo, runbook, brag, learnings, system-docs |
+| `programming` | deliver, grill, refactor, harden, review, migrate, resilience, research, handoff, diagnose |
 | `sre` | create-slo, team-toil |
 | `training` | cycling |
 | `investing` | valuation |
