@@ -12,6 +12,7 @@ Cloud-specific detail lives in per-cloud reference files (`references/aws.md`, `
 | documentation | Writing | memo | Write an Amazon-style narrative or status update |
 | documentation | Career | brag | Keep a running record of impact for reviews and promotion |
 | documentation | Knowledge | learnings | Turn a finished task's lessons into durable instructions |
+| documentation | Knowledge | tour | Teach a newcomer a repo from its core concepts out to its external systems |
 | programming | Planning | grill | Interview the user until a spec is unambiguous, then write SPEC.md |
 | programming | Quality | tdd | Test-first loop with a confirmed failing test |
 | programming | Quality | review | Review a change to Google's code-health standard, and respond to review |
