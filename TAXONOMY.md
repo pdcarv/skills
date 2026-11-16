@@ -22,6 +22,5 @@ Cloud-specific detail lives in per-cloud reference files (`references/aws.md`, `
 | programming | Knowledge | handoff | Hand off a session's state to a fresh session or person |
 | programming | Method | diagnose | Root cause before fix, with runtime evidence and bisect |
 | sre | Reliability | create-slo | Define SLOs and multiwindow burn-rate alerts |
-| sre | Reliability | team-toil | Find and rank toil to automate |
 | training | Cycling | cycling | Plan interview, per-session review and adaptation for one road cyclist |
 | investing | Equities | valuation | Analyse, size and review equity theses with six framework checks and deterministic scripts |

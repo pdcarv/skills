@@ -6,7 +6,7 @@ Every skill uses only the portable Agent Skills frontmatter (`name`, `descriptio
 |---|---|
 | `documentation` | design-doc, adr, memo, runbook, brag, learnings, tour |
 | `programming` | grill, tdd, review, migrate, resilience, research, handoff, diagnose |
-| `sre` | create-slo, team-toil |
+| `sre` | create-slo |
 | `training` | cycling |
 | `investing` | valuation |
 
