@@ -16,7 +16,6 @@ Cloud-specific detail lives in per-cloud reference files (`references/aws.md`, `
 | documentation | Knowledge | tour | Teach a newcomer a repo from its core concepts out to its external systems |
 | programming | Workflow | deliver | Gated phases from spec to hardened, documented code with agents |
 | programming | Planning | grill | Interview the user until a spec is unambiguous, then write SPEC.md |
-| programming | Quality | tdd | Test-first loop with a confirmed failing test |
 | programming | Quality | refactor | Clean up green code by CRAP score, dead code and leftover abstractions |
 | programming | Quality | harden | Make your own change solid: stable suite, tools, scanners, pen-test and review rounds |
 | programming | Quality | review | Explain and review someone else's PR against project rules and checks, and respond to review |

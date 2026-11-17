@@ -7,7 +7,7 @@
   },
   "plugins": [
     { "name": "documentation", "source": "./plugins/documentation", "description": "Design docs, ADRs, runbooks, narrative memos and status updates, brag documents, learnings." },
-    { "name": "programming", "source": "./plugins/programming", "description": "Gated delivery, spec interviews, red/green TDD, refactoring, hardening, root-cause debugging, code review to Google's standard, large-scale migrations, timeout and retry reviews, research notes, session handoffs." },
+    { "name": "programming", "source": "./plugins/programming", "description": "Gated delivery, spec interviews, refactoring, hardening, root-cause debugging, code review to Google's standard, large-scale migrations, timeout and retry reviews, research notes, session handoffs." },
     { "name": "sre", "source": "./plugins/sre", "description": "SLO burn-rate alerts." },
     { "name": "training", "source": "./plugins/training", "description": "Cycling coaching: plan interview, per-session review and evidence-graded adaptation, with athlete state kept in a private folder." },
     { "name": "investing", "source": "./plugins/investing", "description": "Value-investing analysis: verified inputs, screens, scenario and reverse DCF, Kelly sizing, thesis journal and review." }

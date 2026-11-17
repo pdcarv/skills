@@ -5,7 +5,6 @@ Process skills for building and shipping changes with agents. Each skill works i
 | Skill | Use it for |
 |---|---|
 | `grill` | Multiple-choice interview until requirements are unambiguous, then SPEC.md with goals, non-goals and executable acceptance checks. Skipped for small changes. |
-| `tdd` | Tests that assert behaviour, a confirmed red run, tests committed first, implementation without editing tests, full suite green, then a real exercise of the feature. |
 | `deliver` | Gated phases from spec to hardened, documented code: grill, parallel slice agents, spec-blind tests with mutation testing, refactor, harden, document. A small path for small changes. |
 | `refactor` | CRAP hotspots, dead code and leftover abstractions on green code, proposed as before-and-after samples. |
 | `harden` | Your own change before it ships: stable green suite, project tools, scanners, pen-test and review agents in rounds, every finding reproduced. |
@@ -16,7 +15,7 @@ Process skills for building and shipping changes with agents. Each skill works i
 | `handoff` | A standalone handoff file (goal, state, decisions, failed attempts, open questions, next steps, verification status) that a fresh session or a person can resume from. |
 | `diagnose` | Root cause before fix: hypothesis and evidence loop, failing reproduction test, temporary runtime instrumentation, `git bisect run` for regressions (including performance, with custom terms). Stops after three failed fixes. |
 
-Typical order: `deliver` (which runs `grill`, `refactor` and `harden`), then someone else runs `review`. `tdd` for a single change test-first outside `deliver`. `migrate` for the same change across many units. `research` before a decision that needs evidence; `resilience` for each remote call path; `handoff` when work pauses. `diagnose` for any bug, known cause or not.
+Typical order: `deliver` (which runs `grill`, `refactor` and `harden`), then someone else runs `review`. `migrate` for the same change across many units. `research` before a decision that needs evidence; `resilience` for each remote call path; `handoff` when work pauses. `diagnose` for any bug, known cause or not.
 
 Related skills in other plugins: `design-doc`, `adr`, `system-docs` and `learnings` (documentation).
 

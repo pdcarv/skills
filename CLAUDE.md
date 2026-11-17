@@ -1,6 +1,6 @@
 # skills
 
-Personal Agent Skills library, packaged as a Claude Code plugin marketplace owned by `pdcarv`: 5 plugins, 22 skills. README.md covers install, TAXONOMY.md the categories, CONTRIBUTING.md the authoring rules (read it before writing or editing a skill).
+Personal Agent Skills library, packaged as a Claude Code plugin marketplace owned by `pdcarv`: 5 plugins, 21 skills. README.md covers install, TAXONOMY.md the categories, CONTRIBUTING.md the authoring rules (read it before writing or editing a skill).
 
 ## Layout
 
